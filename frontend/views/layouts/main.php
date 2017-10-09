@@ -1,31 +1,22 @@
 <?php
+use yii\helpers\Html;
 /* @var $this \yii\web\View */
-use yii\helpers\ArrayHelper;
-use yii\widgets\Breadcrumbs;
-
 /* @var $content string */
 
-$this->beginContent('@frontend/views/layouts/base.php')
+\frontend\assets\FrontendAsset::register($this);
 ?>
-    <div class="container">
-
-        <?php echo Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-
-        <?php if(Yii::$app->session->hasFlash('alert')):?>
-            <?php echo \yii\bootstrap\Alert::widget([
-                'body'=>ArrayHelper::getValue(Yii::$app->session->getFlash('alert'), 'body'),
-                'options'=>ArrayHelper::getValue(Yii::$app->session->getFlash('alert'), 'options'),
-            ])?>
-        <?php endif; ?>
-
-        <!-- Example of your ads placing -->
-        <?php echo \common\widgets\DbText::widget([
-            'key' => 'ads-example'
-        ]) ?>
-
-        <?php echo $content ?>
-
-    </div>
-<?php $this->endContent() ?>
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?php echo Yii::$app->language ?>">
+<head>
+    <meta charset="<?php echo Yii::$app->charset ?>"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+    <?php echo Html::csrfMetaTags() ?>
+</head>
+<body>
+<?php echo $content ?>
+</body>
+</html>
+<?php $this->endPage() ?>
