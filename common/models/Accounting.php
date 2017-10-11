@@ -11,23 +11,17 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property integer $id
  * @property double $price
+ * @property double $gps_x
+ * @property double $gps_y
  * @property integer $dates
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $category_id
  * @property string $name
- * @property string $thumbnail_base_url
- * @property string $thumbnail_path
  */
 class Accounting extends \yii\db\ActiveRecord
 {
-    /**
-     * @var array
-     */
-    public $thumbnail;
-
-
     /**
      * @inheritdoc
      */
@@ -43,12 +37,6 @@ class Accounting extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'thumbnail',
-                'pathAttribute' => 'thumbnail_path',
-                'baseUrlAttribute' => 'thumbnail_base_url'
-            ]
         ];
     }
 
@@ -58,10 +46,9 @@ class Accounting extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['price'], 'number'],
-            [['thumbnail'], 'safe'],
+            [['price', 'gps_x', 'gps_y'], 'number'],
             [['status', 'created_at', 'updated_at', 'category_id'], 'integer'],
-            [['name', 'thumbnail_base_url', 'thumbnail_path'], 'string', 'max' => 1024],
+            [['name'], 'string', 'max' => 1024],
             [['dates'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             [['dates'], 'default', 'value' => function () {
                 return date(DATE_ISO8601);
@@ -77,9 +64,10 @@ class Accounting extends \yii\db\ActiveRecord
         return [
             'id'            => 'ID',
             'price'         => 'Price',
+            'gps_x'         => 'GPS Coords x',
+            'gps_y'         => 'GPS Coords y',
             'dates'         => 'Dates',
             'status'        => 'Status',
-            'thumbnail'     => 'Thumbnail',
             'name'          => 'Name',
             'category_id'   => 'Category',
             'created_at'    => 'Created At',
