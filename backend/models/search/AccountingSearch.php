@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\WidgetCarouselItem;
+use common\models\Accounting;
 
 /**
- * WidgetCarouselItemSearch represents the model behind the search form about `common\models\WidgetCarouselItem`.
+ * AccountingSearch represents the model behind the search form about `common\models\Accounting`.
  */
-class WidgetCarouselItemSearch extends WidgetCarouselItem
+class AccountingSearch extends Accounting
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class WidgetCarouselItemSearch extends WidgetCarouselItem
     public function rules()
     {
         return [
-            [['id', 'carousel_id', 'status', 'order'], 'integer'],
-            [['path', 'url', 'caption'], 'safe'],
+            [['id', 'dates', 'status'], 'integer'],
+            [['price'], 'number'],
         ];
     }
 
@@ -34,12 +34,14 @@ class WidgetCarouselItemSearch extends WidgetCarouselItem
 
     /**
      * Creates data provider instance with search query applied
+     *
      * @param array $params
+     *
      * @return ActiveDataProvider
      */
-    public function search($params = null)
+    public function search($params)
     {
-        $query = WidgetCarouselItem::find();
+        $query = Accounting::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -51,14 +53,10 @@ class WidgetCarouselItemSearch extends WidgetCarouselItem
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'carousel_id' => $this->carousel_id,
+            'price' => $this->price,
+            'dates' => $this->dates,
             'status' => $this->status,
-            'order' => $this->order,
         ]);
-
-        $query->andFilterWhere(['like', 'path', $this->path])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'caption', $this->caption]);
 
         return $dataProvider;
     }

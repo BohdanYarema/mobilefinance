@@ -1,0 +1,90 @@
+<?php
+
+namespace common\models;
+
+use trntv\filekit\behaviors\UploadBehavior;
+use Yii;
+use yii\behaviors\TimestampBehavior;
+
+/**
+ * This is the model class for table "category".
+ *
+ * @property integer $id
+ * @property string $name
+ * @property string $thumbnail_base_url
+ * @property string $thumbnail_path
+ * @property integer $status
+ * @property integer $created_at
+ * @property integer $updated_at
+ *
+ * @property Accounting[] $accountings
+ */
+class Category extends \yii\db\ActiveRecord
+{
+
+    /**
+     * @var array
+     */
+    public $thumbnail;
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'category';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'thumbnail',
+                'pathAttribute' => 'thumbnail_path',
+                'baseUrlAttribute' => 'thumbnail_base_url'
+            ]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['name'], 'string', 'max' => 512],
+            [['thumbnail_base_url', 'thumbnail_path'], 'string', 'max' => 1024],
+            [['thumbnail'], 'safe'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id'                    => 'ID',
+            'name'                  => 'Name',
+            'thumbnail_base_url'    => 'Thumbnail Base Url',
+            'thumbnail'             => 'Thumbnail',
+            'status'                => 'Status',
+            'created_at'            => 'Created At',
+            'updated_at'            => 'Updated At',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAccountings()
+    {
+        return $this->hasMany(Accounting::className(), ['category_id' => 'id']);
+    }
+}

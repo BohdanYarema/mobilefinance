@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\WidgetCarousel;
+use common\models\Category;
 
 /**
- * WidgetCarouselSearch represents the model behind the search form about `common\models\WidgetCarousel`.
+ * CategorySearch represents the model behind the search form about `common\models\Category`.
  */
-class WidgetCarouselSearch extends WidgetCarousel
+class CategorySearch extends Category
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class WidgetCarouselSearch extends WidgetCarousel
     {
         return [
             [['id', 'status'], 'integer'],
-            [['key'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -34,11 +34,14 @@ class WidgetCarouselSearch extends WidgetCarousel
 
     /**
      * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
     {
-        $query = WidgetCarousel::find();
+        $query = Category::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -53,7 +56,7 @@ class WidgetCarouselSearch extends WidgetCarousel
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'key', $this->key]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
