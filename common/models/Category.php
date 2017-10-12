@@ -89,4 +89,12 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Accounting::className(), ['category_id' => 'id']);
     }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl()
+    {
+        return $this->thumbnail_base_url.'/'.$this->thumbnail_path;
+    }
 }

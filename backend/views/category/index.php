@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\CategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model \common\models\Category */
 
 $this->title = 'Categories';
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,6 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     Yii::t('backend', 'Not Published'),
                     Yii::t('backend', 'Published')
                 ]
+            ],
+            [
+                'format' => [
+                    'thumbnail',
+                    [
+                        'width'=>'360',
+                        'height'=>'auto'
+                    ]
+                ],
+                'value' => function($model){
+                    $image = $model->getImageUrl();
+                    return $image;
+                },
+                'label' => 'Thumbnail',
             ],
             'created_at:datetime',
 
