@@ -22,6 +22,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Accounting extends \yii\db\ActiveRecord
 {
+    const STATUS_DRAFT  = 0;
+    const STATUS_ACTIVE = 1;
+
     /**
      * @inheritdoc
      */
