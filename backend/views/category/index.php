@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'format' => [
-                    'thumbnail',
+                    'image',
                     [
                         'width'=>'360',
                         'height'=>'auto'
