@@ -23,11 +23,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'price',
-            'dates',
-            'status',
+            [
+                'class' => \common\grid\EnumColumn::className(),
+                'attribute' => 'status',
+                'enum' => [
+                    Yii::t('backend', 'Not Published'),
+                    Yii::t('backend', 'Published')
+                ]
+            ],
+            'category.title',
+            'dates:datetime',
             'created_at:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class'     => 'yii\grid\ActionColumn',
+                'template'  => '{update} {delete}'
+            ],
         ],
     ]); ?>
 

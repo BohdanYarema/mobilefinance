@@ -46,6 +46,7 @@ class Accounting extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['category_id'], 'required'],
             [['price', 'gps_x', 'gps_y'], 'number'],
             [['status', 'created_at', 'updated_at', 'category_id'], 'integer'],
             [['name'], 'string', 'max' => 1024],
@@ -78,7 +79,7 @@ class Accounting extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCateogry()
+    public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }

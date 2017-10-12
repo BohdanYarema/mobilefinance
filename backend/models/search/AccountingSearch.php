@@ -18,7 +18,7 @@ class AccountingSearch extends Accounting
     public function rules()
     {
         return [
-            [['id', 'dates', 'status'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['price'], 'number'],
         ];
     }
@@ -41,7 +41,7 @@ class AccountingSearch extends Accounting
      */
     public function search($params)
     {
-        $query = Accounting::find();
+        $query = Accounting::find()->joinWith('category');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
