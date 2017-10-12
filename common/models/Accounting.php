@@ -19,6 +19,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $updated_at
  * @property integer $category_id
  * @property string $name
+ *
+ * @property TagToAccounting[] $tagToAccountings
  */
 class Accounting extends \yii\db\ActiveRecord
 {
@@ -85,5 +87,13 @@ class Accounting extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTagToAccountings()
+    {
+        return $this->hasMany(TagToAccounting::className(), ['accounting_id' => 'id']);
     }
 }

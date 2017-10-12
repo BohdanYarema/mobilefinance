@@ -147,6 +147,8 @@ $bundle = BackendAsset::register($this);
                             'items'=>[
                                 ['label'=>Yii::t('backend', 'Accounting'), 'url'=>['/accounting/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                                 ['label'=>Yii::t('backend', 'Category'), 'url'=>['/category/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>Yii::t('backend', 'Tags'), 'url'=>['/tags/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>Yii::t('backend', 'TagsToAccounting'), 'url'=>['/tagrelation/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                             ]
                         ],
                         [
