@@ -5,6 +5,16 @@ return [
     'showScriptName'=>false,
     'rules'=> [
         // Api
-        ['class' => 'yii\rest\UrlRule', 'controller' => 'site', 'only' => ['index', 'view', 'options', 'create', 'update']],
+        [
+            'class' => 'yii\rest\UrlRule',
+            'controller' => 'accounting',
+            'only' => ['index', 'view', 'options', 'create', 'update']
+        ],
+        // Api
+        [
+            'class' => 'yii\rest\UrlRule',
+            'controller' => 'category',
+            'only' => ['index', 'view', 'options', 'create', 'update']
+        ],
     ]
 ];

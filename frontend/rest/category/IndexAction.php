@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace frontend\controllers;
+namespace frontend\rest\category;
 
 use Yii;
 use yii\data\ActiveDataProvider;

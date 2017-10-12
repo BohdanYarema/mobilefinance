@@ -2,52 +2,20 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\rest\ActiveController;
+use yii\base\Controller;
 
 /**
  * Site controller
  */
 
-class SiteController extends ActiveController
+class SiteController extends Controller
 {
-    public $modelClass = 'common\models\Accounting';
-
     /**
-     * @inheritdoc
+     * Return main page
+     * @return mixed
      */
-    public function actions()
+    public function actionIndex()
     {
-        return [
-            'index' => [
-                'class' => 'frontend\controllers\IndexAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-            ],
-            'view' => [
-                'class' => 'yii\rest\ViewAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-            ],
-            'create' => [
-                'class' => 'yii\rest\CreateAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-                'scenario' => $this->createScenario,
-            ],
-            'update' => [
-                'class' => 'yii\rest\UpdateAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-                'scenario' => $this->updateScenario,
-            ],
-            'delete' => [
-                'class' => 'yii\rest\DeleteAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-            ],
-            'options' => [
-                'class' => 'yii\rest\OptionsAction',
-            ],
-        ];
+        return $this->render('index');
     }
 }
