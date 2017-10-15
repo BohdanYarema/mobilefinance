@@ -10,7 +10,7 @@ use yii\rest\ActiveController;
 
 class CategoryController extends ActiveController
 {
-    public $modelClass = 'common\models\Category';
+    public $modelClass = 'frontend\models\Category';
 
     /**
      * @inheritdoc
