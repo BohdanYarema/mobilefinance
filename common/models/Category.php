@@ -5,6 +5,9 @@ namespace common\models;
 use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use Imagine\Image\Box;
+use Imagine\Image\ImageInterface;
+use Imagine\Gd\Imagine;
 
 /**
  * This is the model class for table "category".
@@ -96,5 +99,25 @@ class Category extends \yii\db\ActiveRecord
     public function getImageUrl()
     {
         return $this->thumbnail_base_url.'/'.$this->thumbnail_path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return Yii::getAlias("@storage").'/web/source/'.$this->thumbnail_path;
+    }
+
+    /**
+     * @inheritdoc
+     */
+
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+        $imagine = new Imagine();
+
+        $imagine->open($this->getImagePath())
+            ->save($this->getImagePath(), ['quality' => 25]);
     }
 }

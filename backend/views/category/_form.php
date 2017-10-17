@@ -20,7 +20,7 @@ use yii\bootstrap\ActiveForm;
         \trntv\filekit\widget\Upload::className(),
         [
             'url' => ['/file-storage/upload'],
-            'maxFileSize' => 5000000, // 5 MiB
+            'maxFileSize' => 50000000, // 5 MiB
         ]);
     ?>
 
