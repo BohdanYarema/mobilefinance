@@ -5,12 +5,12 @@ use Yii;
 use yii\rest\ActiveController;
 
 /**
- * Category controller
+ * Tags controller
  */
 
-class CategoryController extends ActiveController
+class TagsController extends ActiveController
 {
-    public $modelClass = 'frontend\models\Category';
+    public $modelClass = 'frontend\models\Tags';
 
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class CategoryController extends ActiveController
     {
         return [
             'index' => [
-                'class' => 'frontend\rest\category\IndexAction',
+                'class' => 'frontend\rest\tags\IndexAction',
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
             ],

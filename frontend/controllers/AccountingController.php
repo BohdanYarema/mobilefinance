@@ -10,7 +10,7 @@ use yii\rest\ActiveController;
 
 class AccountingController extends ActiveController
 {
-    public $modelClass = 'common\models\Accounting';
+    public $modelClass = 'frontend\models\Accounting';
 
     /**
      * @inheritdoc
