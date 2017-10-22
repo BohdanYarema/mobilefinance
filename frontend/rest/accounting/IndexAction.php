@@ -77,14 +77,14 @@ class IndexAction extends Action
         foreach($dataProvider->getModels() as $model):
             if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
                 $date = Yii::$app->formatter->asDate($model->dates);
-                $response[$model->dates] = [
-                    'id'            => $model->id,
-                    'category_id'   => $model->category_id,
-                    'price'         => $model->price,
-                    'dates'         => $model->dates,
-                    'tags'          => $model->tags
-                ];
             endif;
+            $response[$model->dates][] = [
+                'id'            => $model->id,
+                'category_id'   => $model->category_id,
+                'price'         => $model->price,
+                'dates'         => $model->dates,
+                'tags'          => $model->tags
+            ];
         endforeach;
 
         return $response;

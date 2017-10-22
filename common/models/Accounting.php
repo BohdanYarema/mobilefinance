@@ -55,10 +55,10 @@ class Accounting extends \yii\db\ActiveRecord
             [['price', 'gps_x', 'gps_y'], 'number'],
             [['status', 'created_at', 'updated_at', 'category_id'], 'integer'],
             [['name'], 'string', 'max' => 1024],
-            [['dates'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             [['dates'], 'default', 'value' => function () {
                 return date(DATE_ISO8601);
             }],
+            [['dates'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
         ];
     }
 
