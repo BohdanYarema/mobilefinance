@@ -38,7 +38,7 @@ class IndexAction extends Action
 
 
     /**
-     * @return ActiveDataProvider
+     * @return array
      * @var $id integer
      */
     public function run($id)
@@ -47,16 +47,18 @@ class IndexAction extends Action
             call_user_func($this->checkAccess, $this->id);
         }
 
-        return $this->prepareDataProvider($id);
+        echo json_encode($this->prepareDataProvider($id));
     }
 
     /**
      * Prepares the data provider that should return the requested collection of the models.
-     * @return ActiveDataProvider
+     * @return array
      * @var $id integer
      */
     protected function prepareDataProvider($id)
     {
+        $response = [];
+
         if ($this->prepareDataProvider !== null) {
             return call_user_func($this->prepareDataProvider, $this);
         }
@@ -64,10 +66,27 @@ class IndexAction extends Action
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $this->modelClass;
 
-        return Yii::createObject([
+        $dataProvider = Yii::createObject([
             'class' => ActiveDataProvider::className(),
-            'query' => $modelClass::find()->where(['category_id' => $id]),
+            'query' => $modelClass::find()
+                ->where(['category_id' => $id])
+            ->orderBy(['dates' => SORT_ASC]),
             'pagination' => false,
         ]);
+
+        foreach($dataProvider->getModels() as $model):
+            if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
+                $date = Yii::$app->formatter->asDate($model->dates);
+                $response[$model->dates] = [
+                    'id'            => $model->id,
+                    'category_id'   => $model->category_id,
+                    'price'         => $model->price,
+                    'dates'         => $model->dates,
+                    'tags'          => $model->tags
+                ];
+            endif;
+        endforeach;
+
+        return $response;
     }
 }
