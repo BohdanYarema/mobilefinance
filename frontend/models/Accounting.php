@@ -15,6 +15,7 @@ class Accounting extends \common\models\Accounting
         return [
             'id',
             'price',
+            'name',
             'created_at',
             'tags' => function(){
                 return $this->getTags();
