@@ -83,6 +83,7 @@ class IndexAction extends Action
                 'category_id'   => $model->category_id,
                 'price'         => $model->price,
                 'dates'         => $model->dates,
+                'name'          => $model->name,
                 'tags'          => $model->tags
             ];
         endforeach;
