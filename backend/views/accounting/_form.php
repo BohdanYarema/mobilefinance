@@ -17,6 +17,8 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'price')->textInput() ?>
 
+    <?php echo $form->field($model, 'name')->textInput() ?>
+
     <?php echo $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(
         $categories,
         'id',

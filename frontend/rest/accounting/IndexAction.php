@@ -70,7 +70,7 @@ class IndexAction extends Action
             'class' => ActiveDataProvider::className(),
             'query' => $modelClass::find()
                 ->where(['category_id' => $id])
-            ->orderBy(['dates' => SORT_ASC]),
+            ->orderBy(['dates' => SORT_DESC]),
             'pagination' => false,
         ]);
 

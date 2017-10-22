@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Yii::t('backend', 'Published')
                 ]
             ],
-            'category.name',
+            'name',
             'dates:datetime',
             'created_at:datetime',
 
