@@ -39,21 +39,23 @@ class IndexAction extends Action
 
     /**
      * @return ActiveDataProvider
+     * @var $id integer
      */
-    public function run()
+    public function run($id)
     {
         if ($this->checkAccess) {
             call_user_func($this->checkAccess, $this->id);
         }
 
-        return $this->prepareDataProvider();
+        return $this->prepareDataProvider($id);
     }
 
     /**
      * Prepares the data provider that should return the requested collection of the models.
      * @return ActiveDataProvider
+     * @var $id integer
      */
-    protected function prepareDataProvider()
+    protected function prepareDataProvider($id)
     {
         if ($this->prepareDataProvider !== null) {
             return call_user_func($this->prepareDataProvider, $this);
@@ -64,7 +66,7 @@ class IndexAction extends Action
 
         return Yii::createObject([
             'class' => ActiveDataProvider::className(),
-            'query' => $modelClass::find(),
+            'query' => $modelClass::find()->where(['category_id' => $id]),
             'pagination' => false,
         ]);
     }
