@@ -2,6 +2,8 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\auth\HttpBearerAuth;
 use yii\rest\ActiveController;
 
 /**
@@ -11,6 +13,23 @@ use yii\rest\ActiveController;
 class CategoryController extends ActiveController
 {
     public $modelClass = 'frontend\models\Category';
+
+    public function behaviors()
+    {
+        $behaviors['access'] = [
+            'class' => AccessControl::className(),
+            'only' => ['index'],
+            'rules' => [
+                [
+                    'actions' => ['index'],
+                    'allow' => true,
+                    'roles' => ['@'],
+                ],
+            ],
+        ];
+
+        return $behaviors;
+    }
 
     /**
      * @inheritdoc
