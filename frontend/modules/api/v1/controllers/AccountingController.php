@@ -3,7 +3,7 @@ namespace frontend\modules\api\v1\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\filters\auth\HttpBearerAuth;
+use frontend\modules\api\v1\filters\HttpBearerAuth;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
