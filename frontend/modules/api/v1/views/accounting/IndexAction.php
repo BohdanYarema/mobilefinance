@@ -5,35 +5,14 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace frontend\rest\accounting;
+namespace frontend\modules\api\v1\views\accounting;
 
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\rest\Action;
 
-/**
- * IndexAction implements the API endpoint for listing multiple models.
- *
- * For more details and usage information on IndexAction, see the [guide article on rest controllers](guide:rest-controllers).
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
 class IndexAction extends Action
 {
-    /**
-     * @var callable a PHP callable that will be called to prepare a data provider that
-     * should return a collection of the models. If not set, [[prepareDataProvider()]] will be used instead.
-     * The signature of the callable should be:
-     *
-     * ```php
-     * function ($action) {
-     *     // $action is the action object currently running
-     * }
-     * ```
-     *
-     * The callable should return an instance of [[ActiveDataProvider]].
-     */
     public $prepareDataProvider;
 
 

@@ -10,10 +10,7 @@ $config = [
             //'shouldBeActivated' => true
         ],
         'api' => [
-            'class' => 'frontend\modules\api\Module',
-            'modules' => [
-                'v1' => 'frontend\modules\api\v1\Module'
-            ]
+            'class' => 'frontend\modules\api\v1\Module',
         ]
     ],
     'components' => [
@@ -55,12 +52,11 @@ $config = [
             ]
         ],
         'user' => [
-            'class'             => 'yii\web\User',
-            'identityClass'     => 'common\models\User',
-            'loginUrl'          => null,
-            'enableAutoLogin'   => false,
-            //'as afterLogin'     => 'common\behaviors\LoginTimestampBehavior',
-            'enableSession'     => false
+            'class'=>'yii\web\User',
+            'identityClass' => 'common\models\User',
+            'loginUrl'=>['/user/sign-in/login'],
+            'enableAutoLogin' => true,
+            'as afterLogin' => 'common\behaviors\LoginTimestampBehavior'
         ]
     ]
 ];

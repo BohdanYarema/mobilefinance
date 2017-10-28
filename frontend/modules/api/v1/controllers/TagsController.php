@@ -1,5 +1,5 @@
 <?php
-namespace frontend\controllers;
+namespace frontend\modules\api\v1\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
@@ -7,15 +7,30 @@ use yii\filters\auth\HttpBearerAuth;
 use yii\rest\ActiveController;
 
 /**
- * Category controller
+ * Tags controller
  */
 
-class CategoryController extends ActiveController
+class TagsController extends ActiveController
 {
-    public $modelClass = 'frontend\models\Category';
+    public $modelClass = 'frontend\modules\api\v1\models\Tags';
+
+    /**
+     * @inheritdoc
+     */
+    protected function verbs()
+    {
+        return [
+            'index'     => ['GET', 'HEAD'],
+        ];
+    }
 
     public function behaviors()
     {
+        $behaviors['authenticator'] = [
+            'class' => HttpBearerAuth::className(),
+            'only' => ['index'],
+        ];
+
         $behaviors['access'] = [
             'class' => AccessControl::className(),
             'only' => ['index'],
@@ -25,6 +40,14 @@ class CategoryController extends ActiveController
                     'allow' => true,
                     'roles' => ['@'],
                 ],
+            ],
+        ];
+
+        $behaviors[] = [
+            'class' => \yii\filters\ContentNegotiator::className(),
+            'only' => ['index'],
+            'formats' => [
+                'application/json' => \yii\web\Response::FORMAT_JSON,
             ],
         ];
 
@@ -38,7 +61,7 @@ class CategoryController extends ActiveController
     {
         return [
             'index' => [
-                'class' => 'frontend\rest\category\IndexAction',
+                'class' => 'frontend\modules\api\v1\views\tags\IndexAction',
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
             ],
