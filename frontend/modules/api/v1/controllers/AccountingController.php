@@ -57,7 +57,7 @@ class AccountingController extends ActiveController
             'class' => \yii\filters\ContentNegotiator::className(),
             'only' => ['create'],
             'formats' => [
-                'text/xml' => \yii\web\Response::FORMAT_JSON,
+                'application/json' => \yii\web\Response::FORMAT_JSON,
             ],
         ];
 
