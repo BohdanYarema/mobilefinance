@@ -29,12 +29,6 @@ class AccountingController extends ActiveController
 
     public function behaviors()
     {
-        $behaviors = [
-            'cors' => [
-                'class' => Cors::className(),
-            ]
-        ];
-
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
             'only'      => ['index', 'create'],
