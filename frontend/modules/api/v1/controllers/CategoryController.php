@@ -68,6 +68,19 @@ class CategoryController extends ActiveController
         // add CORS filter
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
+            'cors' => [
+                // restrict access to
+                'Origin' => ['*'],
+                'Access-Control-Request-Method' => ['POST', 'GET', 'OPTIONS'],
+                // Allow only POST and PUT methods
+                'Access-Control-Request-Headers' => ['X-Wsse'],
+                // Allow only headers 'X-Wsse'
+                'Access-Control-Allow-Credentials' => true,
+                // Allow OPTIONS caching
+                'Access-Control-Max-Age' => 3600,
+                // Allow the X-Pagination-Current-Page header to be exposed to the browser.
+                'Access-Control-Expose-Headers' => ['X-Pagination-Current-Page'],
+            ],
         ];
 
         // re-add authentication filter
