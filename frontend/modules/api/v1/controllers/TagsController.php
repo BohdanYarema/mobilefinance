@@ -4,6 +4,7 @@ namespace frontend\modules\api\v1\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\auth\HttpBearerAuth;
+use yii\filters\Cors;
 use yii\rest\ActiveController;
 
 /**
@@ -26,9 +27,16 @@ class TagsController extends ActiveController
 
     public function behaviors()
     {
+        $behaviors = [
+            'cors' => [
+                'class' => Cors::className(),
+            ]
+        ];
+
         $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::className(),
-            'only' => ['index'],
+            'class'     => HttpBearerAuth::className(),
+            'only'      => ['index'],
+            'except'    => ['options'],
         ];
 
         $behaviors['access'] = [
@@ -39,6 +47,12 @@ class TagsController extends ActiveController
                     'actions' => ['index'],
                     'allow' => true,
                     'roles' => ['@'],
+                ],
+                [
+                    'allow' => true,
+                    'actions' => [
+                        'options',
+                    ],
                 ],
             ],
         ];

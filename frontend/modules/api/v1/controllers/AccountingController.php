@@ -4,6 +4,7 @@ namespace frontend\modules\api\v1\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use frontend\modules\api\v1\filters\HttpBearerAuth;
+use yii\filters\Cors;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
@@ -28,9 +29,16 @@ class AccountingController extends ActiveController
 
     public function behaviors()
     {
+        $behaviors = [
+            'cors' => [
+                'class' => Cors::className(),
+            ]
+        ];
+
         $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::className(),
-            'only' => ['index', 'create'],
+            'class'     => HttpBearerAuth::className(),
+            'only'      => ['index', 'create'],
+            'except'    => ['options'],
         ];
 
         $behaviors['access'] = [
@@ -41,6 +49,12 @@ class AccountingController extends ActiveController
                     'actions' => ['index', 'create'],
                     'allow' => true,
                     'roles' => ['@'],
+                ],
+                [
+                    'allow' => true,
+                    'actions' => [
+                        'options',
+                    ],
                 ],
             ],
         ];
