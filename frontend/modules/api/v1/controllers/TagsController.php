@@ -21,7 +21,7 @@ class TagsController extends ActiveController
     protected function verbs()
     {
         return [
-            'index'     => ['GET', 'HEAD'],
+            'index'     => ['GET', 'HEAD', 'OPTIONS'],
         ];
     }
 
@@ -44,9 +44,7 @@ class TagsController extends ActiveController
                 ],
                 [
                     'allow' => true,
-                    'actions' => [
-                        'options',
-                    ],
+                    'actions' => ['options'],
                     'roles' => ['?'],
                 ],
             ],

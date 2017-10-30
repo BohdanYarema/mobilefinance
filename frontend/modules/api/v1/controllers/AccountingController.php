@@ -22,8 +22,8 @@ class AccountingController extends ActiveController
     protected function verbs()
     {
         return [
-            'create'    => ['POST', 'HEAD'],
-            'index'     => ['GET', 'HEAD'],
+            'create'    => ['POST', 'HEAD', 'OPTIONS'],
+            'index'     => ['GET', 'HEAD', 'OPTIONS'],
         ];
     }
 
@@ -46,9 +46,7 @@ class AccountingController extends ActiveController
                 ],
                 [
                     'allow' => true,
-                    'actions' => [
-                        'options',
-                    ],
+                    'actions' => ['options'],
                     'roles' => ['?'],
                 ],
             ],
