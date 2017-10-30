@@ -27,12 +27,14 @@ class CategoryController extends ActiveController
 
     public function behaviors()
     {
+        $behaviors = parent::behaviors();
+        unset($behaviors['authenticator']);
+
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
             'only'      => ['index'],
             'except'    => ['options'],
         ];
-
         $behaviors['access'] = [
             'class' => AccessControl::className(),
             'only' => ['index'],
@@ -73,7 +75,7 @@ class CategoryController extends ActiveController
                 'checkAccess' => [$this, 'checkAccess'],
             ],
             'options' => [
-                'class' => 'frontend\modules\api\v1\views\category\OptionsAction',
+                'class' => 'yii\rest\OptionsAction',
             ],
         ];
     }
