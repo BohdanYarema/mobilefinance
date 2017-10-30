@@ -49,9 +49,6 @@ abstract class AuthMethod extends ActionFilter implements AuthInterface
     {
         $response = $this->response ? : Yii::$app->getResponse();
 
-        var_dump($this->isOptional($action));
-        exit();
-
         try {
             $identity = $this->authenticate(
                 $this->user ? : Yii::$app->getUser(),
@@ -105,6 +102,10 @@ abstract class AuthMethod extends ActionFilter implements AuthInterface
     protected function isOptional($action)
     {
         $id = $this->getActionId($action);
+
+        var_dump($id);
+        exit();
+
         foreach ($this->optional as $pattern) {
             if (fnmatch($pattern, $id)) {
                 return true;
