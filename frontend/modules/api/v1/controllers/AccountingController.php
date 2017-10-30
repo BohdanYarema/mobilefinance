@@ -49,7 +49,7 @@ class AccountingController extends ActiveController
                     'actions' => [
                         'options',
                     ],
-                    'roles' => ['*'],
+                    'roles' => ['?'],
                 ],
             ],
         ];
