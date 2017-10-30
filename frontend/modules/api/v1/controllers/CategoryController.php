@@ -28,10 +28,6 @@ class CategoryController extends ActiveController
 
     public function behaviors()
     {
-        $behaviors['corsFilter'] = [
-            'class' => CorsCustom::className(),
-        ];
-
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
             'only'      => ['index'],
