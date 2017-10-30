@@ -47,6 +47,7 @@ class TagsController extends ActiveController
                     'actions' => [
                         'options',
                     ],
+                    'roles' => ['*'],
                 ],
             ],
         ];

@@ -47,6 +47,7 @@ class CategoryController extends ActiveController
                     'actions' => [
                         'options',
                     ],
+                    'roles' => ['*'],
                 ],
             ],
         ];
