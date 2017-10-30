@@ -27,38 +27,53 @@ class CategoryController extends ActiveController
 
     public function behaviors()
     {
+//        $behaviors = parent::behaviors();
+//        unset($behaviors['authenticator']);
+//
+//        $behaviors['authenticator'] = [
+//            'class'     => HttpBearerAuth::className(),
+//            'only'      => ['index'],
+//            'except'    => ['options'],
+//        ];
+//        $behaviors['access'] = [
+//            'class' => AccessControl::className(),
+//            'only' => ['index'],
+//            'rules' => [
+//                [
+//                    'actions' => ['index'],
+//                    'allow' => true,
+//                    'roles' => ['@'],
+//                ],
+//                [
+//                    'allow' => true,
+//                    'actions' => ['options'],
+//                    'roles' => ['?'],
+//                ],
+//            ],
+//        ];
+//
+//        $behaviors[] = [
+//            'class' => \yii\filters\ContentNegotiator::className(),
+//            'only' => ['index'],
+//            'formats' => [
+//                'application/json' => \yii\web\Response::FORMAT_JSON,
+//            ],
+//        ];
         $behaviors = parent::behaviors();
+
+        // remove authentication filter
+        $auth = $behaviors['authenticator'];
         unset($behaviors['authenticator']);
 
-        $behaviors['authenticator'] = [
-            'class'     => HttpBearerAuth::className(),
-            'only'      => ['index'],
-            'except'    => ['options'],
-        ];
-        $behaviors['access'] = [
-            'class' => AccessControl::className(),
-            'only' => ['index'],
-            'rules' => [
-                [
-                    'actions' => ['index'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
-                [
-                    'allow' => true,
-                    'actions' => ['options'],
-                    'roles' => ['?'],
-                ],
-            ],
+        // add CORS filter
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
         ];
 
-        $behaviors[] = [
-            'class' => \yii\filters\ContentNegotiator::className(),
-            'only' => ['index'],
-            'formats' => [
-                'application/json' => \yii\web\Response::FORMAT_JSON,
-            ],
-        ];
+        // re-add authentication filter
+        $behaviors['authenticator'] = $auth;
+        // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
+        $behaviors['authenticator']['except'] = ['options'];
 
         return $behaviors;
     }
