@@ -1,6 +1,7 @@
 <?php
 namespace frontend\modules\api\v1\controllers;
 
+use frontend\modules\api\v1\components\CorsCustom;
 use frontend\modules\api\v1\filters\HttpBearerAuth;
 use Yii;
 use yii\filters\AccessControl;
@@ -27,6 +28,10 @@ class CategoryController extends ActiveController
 
     public function behaviors()
     {
+        $behaviors['corsFilter'] = [
+            'class' => CorsCustom::className(),
+        ];
+
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
             'only'      => ['index'],
