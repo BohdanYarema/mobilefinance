@@ -34,6 +34,7 @@ class AccountingController extends ActiveController
             'class'     => HttpBearerAuth::className(),
             'only'      => ['index', 'create'],
             'except'    => ['options'],
+            'optional'  => ['options'],
         ];
 
         $behaviors['access'] = [

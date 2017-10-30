@@ -103,9 +103,6 @@ abstract class AuthMethod extends ActionFilter implements AuthInterface
     {
         $id = $this->getActionId($action);
 
-        var_dump($id);
-        exit();
-
         foreach ($this->optional as $pattern) {
             if (fnmatch($pattern, $id)) {
                 return true;

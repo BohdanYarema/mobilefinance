@@ -32,6 +32,7 @@ class CategoryController extends ActiveController
             'class'     => HttpBearerAuth::className(),
             'only'      => ['index'],
             'except'    => ['options'],
+            'optional'  => ['options'],
         ];
 
         $behaviors['access'] = [
