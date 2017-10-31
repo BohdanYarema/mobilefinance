@@ -40,33 +40,6 @@ class CategoryController extends ActiveController
 
     public function behaviors()
     {
-//        $behaviors['authenticator'] = [
-//            'class'  => HttpBearerAuth::className(),
-//            'except' => ['options'],
-//        ];
-//
-//        $behaviors['access'] = [
-//            'class' => AccessControl::className(),
-//            'only' => ['index'],
-//            'rules' => [
-//                [
-//                    'actions' => ['index'],
-//                    'allow' => true,
-//                    'roles' => ['@'],
-//                ],
-//            ],
-//        ];
-//
-//        $behaviors[] = [
-//            'class' => \yii\filters\ContentNegotiator::className(),
-//            'only' => ['index'],
-//            'formats' => [
-//                'application/json' => \yii\web\Response::FORMAT_JSON,
-//            ],
-//        ];
-//
-//        return $behaviors;
-
         $behaviors = parent::behaviors();
         unset($behaviors['authenticator']);
 

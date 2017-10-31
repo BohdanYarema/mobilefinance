@@ -30,22 +30,27 @@ class AccountingController extends ActiveController
 
     public function behaviors()
     {
-        $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::className(),
-            'only' => ['index'],
+        $behaviors = parent::behaviors();
+        unset($behaviors['authenticator']);
+
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className(),
+            'cors' =>  [
+                'Origin' => ['*'],
+                'Access-Control-Request-Method' => ['GET', 'HEAD', 'POST', 'OPTIONS'],
+                'Access-Control-Request-Headers' => ['*'],
+                'Access-Control-Allow-Credentials' => null,
+                'Access-Control-Max-Age' => 86400,
+                'Access-Control-Expose-Headers' => []
+            ]
         ];
 
-        $behaviors['access'] = [
-            'class' => AccessControl::className(),
-            'only' => ['index', 'create'],
-            'rules' => [
-                [
-                    'actions' => ['index', 'create'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
-            ],
+        $behaviors['authenticator'] = [
+            'class'     =>  HttpBearerAuth::className(),
+            'except'    => ['options'],
+            'only'      => ['index', 'create'],
         ];
+
 
         $behaviors[] = [
             'class' => \yii\filters\ContentNegotiator::className(),
