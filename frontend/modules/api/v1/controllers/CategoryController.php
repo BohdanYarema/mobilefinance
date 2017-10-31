@@ -5,6 +5,7 @@ use frontend\modules\api\v1\components\CorsCustom;
 use frontend\modules\api\v1\filters\HttpBearerAuth;
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\auth\CompositeAuth;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
@@ -45,26 +46,23 @@ class CategoryController extends ActiveController
 
         $behaviors['corsFilter'] = [
             'class' => Cors::className(),
-            'cors' => [
-                'class' => Cors::className(),
-                #special rules for particular action
-                'actions' => [
-                    'index' => [
-                        #web-servers which you alllow cross-domain access
-                        'Origin' => ['*'],
-                        'Access-Control-Request-Method' => ['GET'],
-                        'Access-Control-Request-Headers' => ['*'],
-                        'Access-Control-Allow-Credentials' => null,
-                        'Access-Control-Max-Age' => 86400,
-                        'Access-Control-Expose-Headers' => [],
-                    ]
-                ],
-            ],
+            'cors' =>  [
+                'Origin' => ['*'],
+                'Access-Control-Request-Method' => ['GET', 'HEAD', 'OPTIONS'],
+                'Access-Control-Request-Headers' => ['*'],
+                'Access-Control-Allow-Credentials' => null,
+                'Access-Control-Max-Age' => 86400,
+                'Access-Control-Expose-Headers' => []
+            ]
         ];
 
         $behaviors['authenticator'] = [
-            'class'     =>  HttpBearerAuth::className(),
-            'except'    => ['options'],
+            'compositeAuth' => [
+                'class' => CompositeAuth::className(),
+                'authMethods' => [
+                    HttpBearerAuth::className(),
+                ],
+            ],
         ];
 
         return $behaviors;
