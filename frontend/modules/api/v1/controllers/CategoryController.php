@@ -16,6 +16,18 @@ class CategoryController extends ActiveController
 {
     public $modelClass = 'frontend\modules\api\v1\models\Category';
 
+    public function beforeAction($action)
+    {
+        parent::beforeAction($action);
+
+        if (Yii::$app->getRequest()->getMethod() === 'OPTIONS') {
+            // End it, otherwise a 401 will be shown.
+            Yii::$app->end();
+        }
+
+        return true;
+    }
+
     /**
      * @inheritdoc
      */
