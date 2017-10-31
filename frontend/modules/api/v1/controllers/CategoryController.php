@@ -41,10 +41,14 @@ class CategoryController extends ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+
+        // remove authentication filter
+        $auth = $behaviors['authenticator'];
         unset($behaviors['authenticator']);
 
+        // add CORS filter
         $behaviors['corsFilter'] = [
-            'class' => Cors::className(),
+            'class' => \yii\filters\Cors::className(),
             'cors' =>  [
                 'Origin' => ['*'],
                 'Access-Control-Request-Method' => ['GET', 'HEAD', 'OPTIONS'],
@@ -55,10 +59,10 @@ class CategoryController extends ActiveController
             ]
         ];
 
-        $behaviors['authenticator'] = [
-            'class'     =>  HttpBearerAuth::className(),
-            'except'    => ['index'],
-        ];
+        // re-add authentication filter
+        $behaviors['authenticator'] = $auth;
+        // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
+        $behaviors['authenticator']['except'] = ['options'];
 
         return $behaviors;
     }
