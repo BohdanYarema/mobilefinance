@@ -5,7 +5,6 @@ use frontend\modules\api\v1\components\CorsCustom;
 use frontend\modules\api\v1\filters\HttpBearerAuth;
 use Yii;
 use yii\filters\AccessControl;
-use yii\filters\auth\CompositeAuth;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
@@ -57,11 +56,9 @@ class CategoryController extends ActiveController
         ];
 
         $behaviors['authenticator'] = [
-            'class' => CompositeAuth::className(),
-            'except' => ['options'],  // set actions for disable access!
-            'authMethods' => [
-                HttpBearerAuth::className(),
-            ],
+            'class'     =>  HttpBearerAuth::className(),
+            'except'    => ['options'],
+            'only'      => ['index'],
         ];
 
         return $behaviors;
