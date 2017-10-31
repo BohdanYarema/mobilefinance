@@ -2,6 +2,7 @@
 
 namespace frontend\modules\api\v1\controllers;
 
+use yii\filters\Cors;
 use yii\web\Controller;
 
 /**
@@ -20,6 +21,25 @@ class AuthController extends Controller
             'login'  => ['POST', 'HEAD'],
             'signup' => ['POST', 'HEAD'],
         ];
+    }
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className(),
+            'cors' =>  [
+                'Origin' => ['*'],
+                'Access-Control-Request-Method' => ['POST', 'HEAD', 'OPTIONS'],
+                'Access-Control-Request-Headers' => ['*'],
+                'Access-Control-Allow-Credentials' => null,
+                'Access-Control-Max-Age' => 86400,
+                'Access-Control-Expose-Headers' => []
+            ]
+        ];
+
+        return $behaviors;
     }
 
     /**
