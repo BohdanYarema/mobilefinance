@@ -68,7 +68,6 @@ class CategoryController extends ActiveController
 //        return $behaviors;
 
         $behaviors = parent::behaviors();
-
         unset($behaviors['authenticator']);
 
         $behaviors['corsFilter'] = [
@@ -83,7 +82,7 @@ class CategoryController extends ActiveController
 
         $behaviors['authenticator'] = [
             'class' =>  HttpBearerAuth::className(),
-            'except' => ['options','login'],
+            'except' => ['options','index'],
         ];
 
         return $behaviors;
