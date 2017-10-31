@@ -40,23 +40,34 @@ class CategoryController extends ActiveController
 
     public function behaviors()
     {
-        return \yii\helpers\ArrayHelper::merge([
-            [
-                'class' => \yii\filters\Cors::className(),
-                'cors' =>  [
-                    'Origin' => ['*'],
-                    'Access-Control-Request-Method' => ['GET', 'HEAD', 'OPTIONS'],
-                    'Access-Control-Request-Headers' => ['*'],
-                    'Access-Control-Allow-Credentials' => null,
-                    'Access-Control-Max-Age' => 86400,
-                    'Access-Control-Expose-Headers' => []
-                ]
+        $behaviors = parent::behaviors();
+        unset($behaviors['authenticator']);
+
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className(),
+            'cors' => [
+                'class' => Cors::className(),
+                #special rules for particular action
+                'actions' => [
+                    'index' => [
+                        #web-servers which you alllow cross-domain access
+                        'Origin' => ['*'],
+                        'Access-Control-Request-Method' => ['GET'],
+                        'Access-Control-Request-Headers' => ['*'],
+                        'Access-Control-Allow-Credentials' => null,
+                        'Access-Control-Max-Age' => 86400,
+                        'Access-Control-Expose-Headers' => [],
+                    ]
+                ],
             ],
-            [
-                'class'     =>  HttpBearerAuth::className(),
-                'except'    => ['options'],
-            ],
-        ], parent::behaviors());
+        ];
+
+        $behaviors['authenticator'] = [
+            'class'     =>  HttpBearerAuth::className(),
+            'except'    => ['options'],
+        ];
+
+        return $behaviors;
     }
 
     /**
