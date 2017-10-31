@@ -41,8 +41,8 @@ class CategoryController extends ActiveController
     public function behaviors()
     {
         $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::className(),
-            'only' => ['index'],
+            'class'  => HttpBearerAuth::className(),
+            'except' => ['options'],
         ];
 
         $behaviors['access'] = [
