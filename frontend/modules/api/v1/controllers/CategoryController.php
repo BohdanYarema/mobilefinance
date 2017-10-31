@@ -40,24 +40,10 @@ class CategoryController extends ActiveController
 
     public function behaviors()
     {
-        $behaviors = parent::behaviors();
-        unset($behaviors['authenticator']);
-
-        $behaviors['corsFilter'] = [
-            'class' => Cors::className(),
-            'cors' =>  [
-                'Origin' => ['*'],
-                'Access-Control-Request-Method' => ['GET', 'HEAD', 'OPTIONS'],
-                'Access-Control-Request-Headers' => ['*'],
-                'Access-Control-Allow-Credentials' => null,
-                'Access-Control-Max-Age' => 86400,
-                'Access-Control-Expose-Headers' => []
-            ]
-        ];
-
         $behaviors['authenticator'] = [
-            'class' =>  HttpBearerAuth::className(),
-            'except' => ['options','index'],
+            'class'     => HttpBearerAuth::className(),
+            'only'      => ['index'],
+            'except'    => ['options'],
         ];
 
         return $behaviors;
