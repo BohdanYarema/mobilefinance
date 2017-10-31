@@ -57,11 +57,10 @@ class CategoryController extends ActiveController
         ];
 
         $behaviors['authenticator'] = [
-            'compositeAuth' => [
-                'class' => CompositeAuth::className(),
-                'authMethods' => [
-                    HttpBearerAuth::className(),
-                ],
+            'class' => CompositeAuth::className(),
+            'except' => ['options'],  // set actions for disable access!
+            'authMethods' => [
+                HttpBearerAuth::className(),
             ],
         ];
 
