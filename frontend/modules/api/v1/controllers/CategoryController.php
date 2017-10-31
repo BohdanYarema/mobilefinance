@@ -54,7 +54,7 @@ class CategoryController extends ActiveController
                 'Access-Control-Request-Method' => ['GET', 'HEAD', 'OPTIONS'],
                 'Access-Control-Request-Headers' => ['*'],
                 'Access-Control-Allow-Credentials' => null,
-                'Access-Control-Max-Age' => 86400,
+                'Access-Control-Max-Age' => 0,
                 'Access-Control-Expose-Headers' => []
             ]
         ];
