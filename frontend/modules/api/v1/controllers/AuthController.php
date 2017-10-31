@@ -26,19 +26,6 @@ class AuthController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-
-        $behaviors['corsFilter'] = [
-            'class' => Cors::className(),
-            'cors' =>  [
-                'Origin' => ['*'],
-                'Access-Control-Request-Method' => ['POST', 'HEAD', 'OPTIONS'],
-                'Access-Control-Request-Headers' => ['*'],
-                'Access-Control-Allow-Credentials' => null,
-                'Access-Control-Max-Age' => 86400,
-                'Access-Control-Expose-Headers' => []
-            ]
-        ];
-
         return $behaviors;
     }
 
