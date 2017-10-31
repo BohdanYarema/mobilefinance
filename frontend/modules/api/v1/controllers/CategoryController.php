@@ -61,6 +61,7 @@ class CategoryController extends ActiveController
 
         // re-add authentication filter
         $behaviors['authenticator'] = $auth;
+        $behaviors['authenticator']['class'] = HttpBearerAuth::className();
         // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
         $behaviors['authenticator']['only'] = ['index'];
 
