@@ -16,8 +16,8 @@ class Accounting extends \common\models\Accounting
             'id',
             'price',
             'name',
-            'gps_lat',
-            'gps_lon',
+            'gps_x',
+            'gps_y',
             'created_at',
             'tags' => function(){
                 return $this->getTags();
