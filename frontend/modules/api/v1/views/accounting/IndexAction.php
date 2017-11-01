@@ -63,7 +63,9 @@ class IndexAction extends Action
                 'price'         => $model->price,
                 'dates'         => $model->dates,
                 'name'          => $model->name,
-                'tags'          => $model->tags
+                'gps_lat'       => $model->gps_lat,
+                'gps_lon'       => $model->gps_lon
+                'tags'          => $model->tags,
             ];
         endforeach;
 
