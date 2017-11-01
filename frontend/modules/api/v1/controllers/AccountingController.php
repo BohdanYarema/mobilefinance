@@ -34,25 +34,8 @@ class AccountingController extends ActiveController
             'class'     => HttpBearerAuth::className(),
             'only'      => ['index', 'create'],
             'except'    => ['options'],
-            'optional'  => ['options'],
         ];
 
-        $behaviors['access'] = [
-            'class' => AccessControl::className(),
-            'only' => ['index', 'create'],
-            'rules' => [
-                [
-                    'actions' => ['index', 'create'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
-                [
-                    'allow' => true,
-                    'actions' => ['options'],
-                    'roles' => ['?'],
-                ],
-            ],
-        ];
 
         $behaviors[] = [
             'class' => \yii\filters\ContentNegotiator::className(),

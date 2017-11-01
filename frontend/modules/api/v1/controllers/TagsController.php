@@ -32,24 +32,6 @@ class TagsController extends ActiveController
             'class'     => HttpBearerAuth::className(),
             'only'      => ['index'],
             'except'    => ['options'],
-            'optional'  => ['options'],
-        ];
-
-        $behaviors['access'] = [
-            'class' => AccessControl::className(),
-            'only' => ['index'],
-            'rules' => [
-                [
-                    'actions' => ['index'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
-                [
-                    'allow' => true,
-                    'actions' => ['options'],
-                    'roles' => ['?'],
-                ],
-            ],
         ];
 
         $behaviors[] = [

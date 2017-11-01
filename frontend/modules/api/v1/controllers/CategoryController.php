@@ -34,23 +34,6 @@ class CategoryController extends ActiveController
             'except'    => ['options'],
         ];
 
-        $behaviors['access'] = [
-            'class' => AccessControl::className(),
-            'only' => ['index'],
-            'rules' => [
-                [
-                    'actions' => ['index'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
-                [
-                    'allow' => true,
-                    'actions' => ['options'],
-                    'roles' => ['?'],
-                ],
-            ],
-        ];
-
         $behaviors[] = [
             'class' => \yii\filters\ContentNegotiator::className(),
             'only' => ['index'],

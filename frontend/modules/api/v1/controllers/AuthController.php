@@ -2,6 +2,7 @@
 
 namespace frontend\modules\api\v1\controllers;
 
+use yii\filters\Cors;
 use yii\web\Controller;
 
 /**
@@ -20,6 +21,12 @@ class AuthController extends Controller
             'login'  => ['POST', 'HEAD'],
             'signup' => ['POST', 'HEAD'],
         ];
+    }
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        return $behaviors;
     }
 
     /**
