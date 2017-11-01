@@ -32,7 +32,8 @@ class LoginAction extends Action
                     'created_at'    => Yii::$app->user->identity->created_at,
                 ]);
             } else {
-                throw new HttpException(401 ,'Username of password are invalid');
+                Yii::$app->response->setStatusCode(401);
+                //throw new HttpException(401 ,'Username of password are invalid');
             }
         }
     }
