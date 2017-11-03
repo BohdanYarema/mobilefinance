@@ -7,6 +7,7 @@
 
 namespace frontend\modules\api\v1\views\accounting;
 
+use frontend\modules\api\v1\models\Accounting;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\rest\Action;
@@ -20,13 +21,13 @@ class IndexAction extends Action
      * @return array
      * @var $id integer
      */
-    public function run($id)
+    public function run()
     {
         if ($this->checkAccess) {
             call_user_func($this->checkAccess, $this->id);
         }
 
-        echo json_encode($this->prepareDataProvider($id));
+        echo json_encode($this->prepareDataProvider());
     }
 
     /**
@@ -34,7 +35,7 @@ class IndexAction extends Action
      * @return array
      * @var $id integer
      */
-    protected function prepareDataProvider($id)
+    protected function prepareDataProvider()
     {
         $response = [];
 
@@ -45,30 +46,29 @@ class IndexAction extends Action
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $this->modelClass;
 
-        $dataProvider = Yii::createObject([
-            'class' => ActiveDataProvider::className(),
-            'query' => $modelClass::find()
-                ->where(['category_id' => $id])
-            ->orderBy(['dates' => SORT_DESC]),
-            'pagination' => false,
-        ]);
+        $forday = $modelClass::find()
+            ->select([
+                'COUNT(id) as result',
+                "dates",
+            ])
+            ->groupBy('dates')
+            ->asArray()
+            ->all();
 
-        foreach($dataProvider->getModels() as $model):
-            if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
-                $date = Yii::$app->formatter->asDate($model->dates);
-            endif;
-            $response[$model->dates][] = [
-                'id'            => $model->id,
-                'category_id'   => $model->category_id,
-                'price'         => $model->price,
-                'dates'         => $model->dates,
-                'name'          => $model->name,
-                'gps_x'         => $model->gps_x,
-                'gps_y'         => $model->gps_y,
-                'tags'          => $model->tags,
-            ];
-        endforeach;
+        $forcategory = $modelClass::find()
+            ->select([
+                'COUNT(id) as result',
+                "category_id",
+            ])
+            ->groupBy('category_id')
+            ->asArray()
+            ->all();
 
-        return $response;
+        $response = [
+            'perday'        => $forday,
+            'percategory'   => $forcategory
+        ];
+
+        return json_encode($response);
     }
 }

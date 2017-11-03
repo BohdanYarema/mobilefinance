@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\query\AccountingQuery;
 use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -95,5 +96,13 @@ class Accounting extends \yii\db\ActiveRecord
     public function getTagToAccountings()
     {
         return $this->hasMany(TagToAccounting::className(), ['accounting_id' => 'id']);
+    }
+
+    /**
+     * @return AccountingQuery
+     */
+    public static function find()
+    {
+        return new AccountingQuery(get_called_class());
     }
 }
