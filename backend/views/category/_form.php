@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\color\ColorInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Category */
@@ -24,6 +25,11 @@ use yii\bootstrap\ActiveForm;
         ]);
     ?>
 
+    <?php
+        echo $form->field($model, 'color')->widget(ColorInput::classname(), [
+            'options' => ['placeholder' => 'Select color ...', 'readonly' => true],
+        ]);
+    ?>
     <?php echo $form->field($model, 'status')->checkbox() ?>
 
     <div class="form-group">

@@ -16,6 +16,7 @@ use Imagine\Gd\Imagine;
  * @property string $name
  * @property string $thumbnail_base_url
  * @property string $thumbnail_path
+ * @property string $color
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
@@ -64,6 +65,8 @@ class Category extends \yii\db\ActiveRecord
         return [
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 512],
+            [['color'], 'string', 'max' => 16],
+            [['color'], 'unique'],
             [['thumbnail_base_url', 'thumbnail_path'], 'string', 'max' => 1024],
             [['thumbnail'], 'safe'],
         ];
@@ -80,6 +83,7 @@ class Category extends \yii\db\ActiveRecord
             'thumbnail_base_url'    => 'Thumbnail Base Url',
             'thumbnail'             => 'Thumbnail',
             'status'                => 'Status',
+            'color'                 => 'Color',
             'created_at'            => 'Created At',
             'updated_at'            => 'Updated At',
         ];
