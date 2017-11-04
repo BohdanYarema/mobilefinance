@@ -54,7 +54,7 @@ class IndexAction extends Action
             12 => 0
         ];
 
-        $doughnut = [
+        $bar = [
             1 => 0,
             2 => 0,
             3 => 0,
@@ -80,7 +80,7 @@ class IndexAction extends Action
             23 => 0,
             24 => 0
         ];
-        $bar = [];
+        $doughnut = [];
 
         if ($this->prepareDataProvider !== null) {
             return call_user_func($this->prepareDataProvider, $this);
@@ -151,14 +151,14 @@ class IndexAction extends Action
             ->asArray()
             ->all();
 
-        $bar = $query;
+        $doughnut = $query;
 
         $query = $modelClass::find()->all();
 
         foreach ($query as $item) {
             $hour = date('H', $item->dates);
-            if (array_key_exists($hour, $doughnut)){
-                $doughnut[$hour] += 1;
+            if (array_key_exists($hour, $bar)){
+                $bar[$hour] += 1;
             }
         }
 
