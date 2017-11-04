@@ -40,18 +40,54 @@ class IndexAction extends Action
     {
         $response = [];
         $line = [
-            1 => 0,
-            2 => 0,
-            3 => 0,
-            4 => 0,
-            5 => 0,
-            6 => 0,
-            7 => 0,
-            8 => 0,
-            9 => 0,
-            10 => 0,
-            11 => 0,
-            12 => 0
+            1 => [
+                'name'  => 'January',
+                'count' => 0
+            ],
+            2 => [
+                'name'  => 'Febuary',
+                'count' => 0
+            ],
+            3 => [
+                'name'  => 'March',
+                'count' => 0
+            ],
+            4 => [
+                'name'  => 'April',
+                'count' => 0
+            ],
+            5 => [
+                'name'  => 'May',
+                'count' => 0
+            ],
+            6 => [
+                'name'  => 'June',
+                'count' => 0
+            ],
+            7 => [
+                'name'  => 'July',
+                'count' => 0
+            ],
+            8 => [
+                'name'  => 'August',
+                'count' => 0
+            ],
+            9 => [
+                'name'  => 'September',
+                'count' => 0
+            ],
+            10 => [
+                'name'  => 'October',
+                'count' => 0
+            ],
+            11 => [
+                'name'  => 'November',
+                'count' => 0
+            ],
+            12 => [
+                'name'  => 'December',
+                'count' => 0
+            ],
         ];
 
         $bar = [];
@@ -70,51 +106,51 @@ class IndexAction extends Action
             $mounth = date('m', $item->dates);
             switch ($mounth){
                 case 1 : {
-                    $line[1] += 1;
+                    $line[1]['count'] += 1;
                     break;
                 }
                 case 2 : {
-                    $line[2] += 1;
+                    $line[2]['count']  += 1;
                     break;
                 }
                 case 3 : {
-                    $line[3] += 1;
+                    $line[3]['count']  += 1;
                     break;
                 }
                 case 4 : {
-                    $line[4] += 1;
+                    $line[4]['count']  += 1;
                     break;
                 }
                 case 5 : {
-                    $line[5] += 1;
+                    $line[5]['count']  += 1;
                     break;
                 }
                 case 6 : {
-                    $line[6] += 1;
+                    $line[6]['count']  += 1;
                     break;
                 }
                 case 7 : {
-                    $line[7] += 1;
+                    $line[7]['count']  += 1;
                     break;
                 }
                 case 8 : {
-                    $line[8] += 1;
+                    $line[8]['count']  += 1;
                     break;
                 }
                 case 9 : {
-                    $line[9] += 1;
+                    $line[9]['count']  += 1;
                     break;
                 }
                 case 10 : {
-                    $line[10] += 1;
+                    $line[10]['count']  += 1;
                     break;
                 }
                 case 11 : {
-                    $line[11] += 1;
+                    $line[11]['count']  += 1;
                     break;
                 }
                 case 12 : {
-                    $line[12] += 1;
+                    $line[12]['count']  += 1;
                     break;
                 }
             }
