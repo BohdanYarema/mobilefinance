@@ -94,7 +94,7 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getAccountings()
     {
-        return $this->hasMany(Accounting::className(), ['category_id' => 'id']);
+        return $this->hasMany(Accounting::className(), ['category_id' => 'id'])->andWhere(['user_id' => Yii::$app->user->id]);
     }
 
     /**

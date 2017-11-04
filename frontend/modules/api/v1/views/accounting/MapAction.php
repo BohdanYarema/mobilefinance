@@ -52,6 +52,7 @@ class MapAction extends Action
             ->andWhere(['not', ['gps_y' => null]])
             ->andWhere(['not', ['gps_x' => 0]])
             ->andWhere(['not', ['gps_y' => 0]])
+            ->andWhere(['user_id' => Yii::$app->user->id])
             ->asArray()
             ->all();
 

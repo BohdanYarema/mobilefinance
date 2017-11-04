@@ -100,7 +100,7 @@ class IndexAction extends Action
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $this->modelClass;
 
-        $query = $modelClass::find()->all();
+        $query = $modelClass::find()->where(['user_id' => Yii::$app->user->id])->all();
 
         foreach ($query as $item) {
             $mounth = date('m', $item->dates);
@@ -175,6 +175,7 @@ class IndexAction extends Action
                 ->select(['Count(id) as stats', "dates"])
                 ->groupBy("dates")
                 ->where(['category_id' => $item['id']])
+                ->andWhere(['user_id' => Yii::$app->user->id])
                 ->orderBy(['stats' => SORT_DESC])
                 ->asArray()
                 ->one();

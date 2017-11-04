@@ -48,6 +48,7 @@ class ListAction extends Action
         $dataProvider = Yii::createObject([
             'class' => ActiveDataProvider::className(),
             'query' => $modelClass::find()
+                ->andWhere(['user_id' => Yii::$app->user->id])
                 ->where(['category_id' => $id])
                 ->orderBy(['dates' => SORT_DESC]),
             'pagination' => false,

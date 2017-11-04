@@ -19,6 +19,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $category_id
+ * @property integer $user_id
  * @property string $name
  *
  * @property TagToAccounting[] $tagToAccountings
@@ -52,10 +53,11 @@ class Accounting extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id'], 'required'],
+            [['category_id', 'user_id'], 'required'],
             [['price', 'gps_x', 'gps_y'], 'number'],
-            [['status', 'created_at', 'updated_at', 'category_id'], 'integer'],
+            [['status', 'created_at', 'updated_at', 'category_id', 'user_id'], 'integer'],
             [['name'], 'string', 'max' => 1024],
+            [['user_id'], 'default', Yii::$app->user->id],
             [['dates'], 'default', 'value' => function () {
                 return date(DATE_ISO8601);
             }],
@@ -77,6 +79,7 @@ class Accounting extends \yii\db\ActiveRecord
             'status'        => 'Status',
             'name'          => 'Name',
             'category_id'   => 'Category',
+            'user_id'       => 'User id',
             'created_at'    => 'Created At',
             'updated_at'    => 'Updated At',
         ];
