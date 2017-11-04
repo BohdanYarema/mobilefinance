@@ -7,6 +7,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $model common\models\Accounting */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $categories common\models\Category[] */
+/* @var $users common\models\User[] */
 ?>
 
 <div class="accounting-form">
@@ -23,6 +24,12 @@ use yii\bootstrap\ActiveForm;
         $categories,
         'id',
         'name'
+    )) ?>
+
+    <?php echo $form->field($model, 'user_id')->dropDownList(\yii\helpers\ArrayHelper::map(
+        $users,
+        'id',
+        'username'
     )) ?>
 
     <?php echo $form->field($model, 'gps_x')->textInput() ?>

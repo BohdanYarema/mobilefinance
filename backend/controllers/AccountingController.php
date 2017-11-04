@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Category;
+use common\models\User;
 use Yii;
 use common\models\Accounting;
 use backend\models\search\AccountingSearch;
@@ -51,6 +52,7 @@ class AccountingController extends Controller
     {
         $model      = new Accounting();
         $categories = Category::find()->all();
+        $users      = User::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
@@ -61,7 +63,8 @@ class AccountingController extends Controller
         } else {
             return $this->render('create', [
                 'model'         => $model,
-                'categories'    => $categories
+                'categories'    => $categories,
+                'users'         => $users
             ]);
         }
     }
@@ -76,6 +79,7 @@ class AccountingController extends Controller
     {
         $model      = $this->findModel($id);
         $categories = Category::find()->all();
+        $users      = User::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
@@ -86,7 +90,8 @@ class AccountingController extends Controller
         } else {
             return $this->render('update', [
                 'model'         => $model,
-                'categories'    => $categories
+                'categories'    => $categories,
+                'users'         => $users
             ]);
         }
     }

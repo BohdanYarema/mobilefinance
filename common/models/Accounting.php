@@ -57,7 +57,7 @@ class Accounting extends \yii\db\ActiveRecord
             [['price', 'gps_x', 'gps_y'], 'number'],
             [['status', 'created_at', 'updated_at', 'category_id', 'user_id'], 'integer'],
             [['name'], 'string', 'max' => 1024],
-            [['user_id'], 'default', Yii::$app->user->id],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['dates'], 'default', 'value' => function () {
                 return date(DATE_ISO8601);
             }],
