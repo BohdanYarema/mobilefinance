@@ -157,7 +157,9 @@ class IndexAction extends Action
 
         foreach ($query as $item) {
             $hour = date('H', $item->dates);
-            $doughnut[$hour] += 1;
+            if (array_key_exists($hour, $doughnut)){
+                $doughnut[$hour] += 1;
+            }
         }
 
         $response = [
