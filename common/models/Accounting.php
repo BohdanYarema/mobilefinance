@@ -53,7 +53,7 @@ class Accounting extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'user_id'], 'required'],
+            [['category_id'], 'required'],
             [['price', 'gps_x', 'gps_y'], 'number'],
             [['status', 'created_at', 'updated_at', 'category_id', 'user_id'], 'integer'],
             [['name'], 'string', 'max' => 1024],
