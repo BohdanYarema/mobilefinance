@@ -25,6 +25,8 @@ class AccountingController extends ActiveController
         return [
             'create'    => ['POST', 'HEAD', 'OPTIONS'],
             'index'     => ['GET', 'HEAD', 'OPTIONS'],
+            'list'      => ['GET', 'HEAD', 'OPTIONS'],
+            'map'       => ['GET', 'HEAD', 'OPTIONS'],
         ];
     }
 
@@ -32,14 +34,14 @@ class AccountingController extends ActiveController
     {
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
-            'only'      => ['create', 'list', 'index'],
+            'only'      => ['create', 'list', 'index', 'map'],
             'except'    => ['options'],
         ];
 
 
         $behaviors[] = [
             'class' => \yii\filters\ContentNegotiator::className(),
-            'only' => ['index', 'create', 'list'],
+            'only' => ['index', 'create', 'list', 'map'],
             'formats' => [
                 'application/json' => \yii\web\Response::FORMAT_JSON,
             ],
@@ -61,6 +63,11 @@ class AccountingController extends ActiveController
             ],
             'list' => [
                 'class' => 'frontend\modules\api\v1\views\accounting\ListAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'map' => [
+                'class' => 'frontend\modules\api\v1\views\accounting\MapAction',
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
             ],
