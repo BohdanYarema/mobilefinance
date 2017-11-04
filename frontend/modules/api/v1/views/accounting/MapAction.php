@@ -50,6 +50,8 @@ class MapAction extends Action
             ->groupBy(['gps_x', 'gps_y'])
             ->andWhere(['not', ['gps_x' => null]])
             ->andWhere(['not', ['gps_y' => null]])
+            ->andWhere(['not', ['gps_x' => 0]])
+            ->andWhere(['not', ['gps_y' => 0]])
             ->asArray()
             ->all();
 
