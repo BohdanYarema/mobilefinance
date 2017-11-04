@@ -168,6 +168,6 @@ class IndexAction extends Action
             'line'      => $line
         ];
 
-        return json_encode($response);
+        return $response;
     }
 }
