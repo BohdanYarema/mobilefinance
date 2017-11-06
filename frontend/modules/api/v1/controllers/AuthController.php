@@ -20,6 +20,7 @@ class AuthController extends Controller
         return [
             'login'  => ['POST', 'HEAD'],
             'signup' => ['POST', 'HEAD'],
+            'upload' => ['POST', 'HEAD'],
         ];
     }
 
@@ -37,6 +38,11 @@ class AuthController extends Controller
         return [
             'login' => [
                 'class' => 'frontend\modules\api\v1\views\auth\LoginAction',
+                'checkAccess' => [$this, 'checkAccess'],
+                'modelClass' => $this->modelClass,
+            ],
+            'upload' => [
+                'class' => 'frontend\modules\api\v1\views\auth\UploadAction',
                 'checkAccess' => [$this, 'checkAccess'],
                 'modelClass' => $this->modelClass,
             ],

@@ -32,9 +32,10 @@ class SystemLog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['level', 'log_time', 'message'], 'integer'],
+            [['level', 'log_time'], 'integer'],
             [['log_time'], 'required'],
             [['prefix'], 'string'],
+            [['message'], 'safe'],
             [['category'], 'string', 'max' => 255]
         ];
     }
