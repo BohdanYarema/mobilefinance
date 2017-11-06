@@ -14,19 +14,16 @@ class UploadAction extends Action
      */
     public function run()
     {
-        if (Yii::$app->request->post()){
-
-            $model = new SystemLog();
-            $model->level = 4;
-            $model->log_time = time();
-            $model->prefix = "test";
-            $model->category = 'test';
-            $model->message = json_encode(['file' => $_FILES, 'post' => $_POST]);
+        $model = new SystemLog();
+        $model->level = 4;
+        $model->log_time = time();
+        $model->prefix = "test";
+        $model->category = 'test';
+        $model->message = json_encode(['file' => $_FILES, 'post' => $_POST]);
 
 
 
-            $model->save();
-            exit();
-        }
+        $model->save();
+        exit();
     }
 }
