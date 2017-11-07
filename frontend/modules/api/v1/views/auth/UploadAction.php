@@ -42,7 +42,7 @@ class UploadAction extends Action
 //            ],
 //        ];
 
-        $uploads->saveAs(Yii::getAlias("@web/fileupload").'/test.jpg');
+        $uploads->saveAs(Yii::getAlias('@webroot/fileupload') . '/' . "test.png");
 
         var_dump($uploads);
     }
