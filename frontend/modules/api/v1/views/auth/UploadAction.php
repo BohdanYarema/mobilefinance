@@ -22,9 +22,12 @@ class UploadAction extends Action
         } else {
             $ext = $uploads->getExtension();
             $uploads->saveAs(Yii::getAlias('@webroot/fileupload').'/'.Yii::$app->user->id."_".time()."_user_logo_".$ext);
+
+            var_dump($uploads);
+            exit();
+
             $response = Yii::$app->getResponse();
-            $response->setStatusCode(404);
-            echo json_encode($uploads);
+            $response->setStatusCode(200);
         }
     }
 }

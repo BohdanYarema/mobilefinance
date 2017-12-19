@@ -2,6 +2,7 @@
 
 namespace frontend\modules\api\v1\controllers;
 
+use frontend\modules\api\v1\filters\HttpBearerAuth;
 use yii\filters\Cors;
 use yii\web\Controller;
 
@@ -27,6 +28,22 @@ class AuthController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+
+        $behaviors['authenticator'] = [
+            'class'     => HttpBearerAuth::className(),
+            'only'      => ['uploads'],
+            'except'    => ['options'],
+        ];
+
+
+        $behaviors[] = [
+            'class' => \yii\filters\ContentNegotiator::className(),
+            'only' => ['uploads'],
+            'formats' => [
+                'application/json' => \yii\web\Response::FORMAT_JSON,
+            ],
+        ];
+
         return $behaviors;
     }
 
