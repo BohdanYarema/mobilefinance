@@ -9,3 +9,10 @@ phpinfo();
 ?>
 
 <h1>Hi on our site !)))</h1>
+
+<?php
+    var_dump(Yii::getAlias('@storage/web/source/1/'));
+$model  = \common\models\UserProfile::find()->where(['user_id' => Yii::$app->user->id])->one();
+var_dump($model);
+var_dump(Yii::$app->user->id);
+?>

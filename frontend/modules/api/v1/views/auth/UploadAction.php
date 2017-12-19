@@ -22,12 +22,14 @@ class UploadAction extends Action
             throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
         } else {
             $ext = $uploads->getExtension();
-            $uploads->saveAs(Yii::getAlias('@webroot/fileupload').'/'.Yii::$app->user->id."_".time()."_user_logo_".$ext);
+            $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').Yii::$app->user->id."_".time()."_user_logo_".$ext);
 
+            var_dump($uploads);
             var_dump(Yii::getAlias('@webroot/fileupload'));
 
             $model  = UserProfile::find()->where(['user_id' => Yii::$app->user->id])->one();
             var_dump($model);
+            var_dump(Yii::$app->user->id);
             exit();
 
             $model->avatar_base_url = 'http://storage.mobilefinance.local.dev/source';
