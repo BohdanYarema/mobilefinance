@@ -27,7 +27,7 @@ class UploadAction extends Action
 
             $model  = UserProfile::find()->where(['user_id' => Yii::$app->user->id])->one();
             $model->avatar_base_url = Yii::getAlias('@storageUrl').'/source';
-            $model->avatar_path     = '1/';
+            $model->avatar_path     = '1/'.$name;
             $model->save();
 
             $response = Yii::$app->getResponse();
