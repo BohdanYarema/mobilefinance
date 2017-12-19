@@ -24,16 +24,9 @@ class UploadAction extends Action
             $ext = $uploads->getExtension();
             $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').Yii::$app->user->id."_".time()."_user_logo_".$ext);
 
-            var_dump($uploads);
-            var_dump(Yii::getAlias('@webroot/fileupload'));
-
             $model  = UserProfile::find()->where(['user_id' => Yii::$app->user->id])->one();
-            var_dump($model);
-            var_dump(Yii::$app->user->id);
-            exit();
-
-            $model->avatar_base_url = 'http://storage.mobilefinance.local.dev/source';
-            $model->avatar_path     = '1/f1pVFmRXHzARx7FtW0Sfp4sjKqI-1aM0.jpg';
+            $model->avatar_base_url = Yii::getAlias('@storage/web/source');
+            $model->avatar_path     = '1/'.$uploads['name'];
             $model->save();
 
             $response = Yii::$app->getResponse();
