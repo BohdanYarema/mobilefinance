@@ -38,12 +38,12 @@ class UserProfile extends ActiveRecord
     public function behaviors()
     {
         return [
-            'picture' => [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'picture',
-                'pathAttribute' => 'avatar_path',
-                'baseUrlAttribute' => 'avatar_base_url'
-            ]
+//            'picture' => [
+//                'class' => UploadBehavior::className(),
+//                'attribute' => 'picture',
+//                'pathAttribute' => 'avatar_path',
+//                'baseUrlAttribute' => 'avatar_base_url'
+//            ]
         ];
     }
 
