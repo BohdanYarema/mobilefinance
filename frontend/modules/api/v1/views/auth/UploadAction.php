@@ -26,7 +26,7 @@ class UploadAction extends Action
 
             var_dump(Yii::getAlias('@webroot/fileupload'));
 
-            $model  = UserProfile::findOne(Yii::$app->user->id);
+            $model  = UserProfile::find()->where(['user_id' => Yii::$app->user->id])->one();
             $model->avatar_base_url = 'http://storage.mobilefinance.local.dev/source';
             $model->avatar_path     = '1/f1pVFmRXHzARx7FtW0Sfp4sjKqI-1aM0.jpg';
             $model->save();
