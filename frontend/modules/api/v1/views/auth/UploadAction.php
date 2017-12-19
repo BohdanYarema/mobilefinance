@@ -30,6 +30,8 @@ class UploadAction extends Action
             $model->avatar_path     = '1/'.$name;
             $model->save();
 
+            echo $model->getAvatar();
+
             $response = Yii::$app->getResponse();
             $response->setStatusCode(200);
         }
