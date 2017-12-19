@@ -29,11 +29,10 @@ class AuthController extends Controller
     {
         $behaviors = parent::behaviors();
 
-//        $behaviors['authenticator'] = [
-//            'class'     => HttpBearerAuth::className(),
-//            'only'      => ['uploads'],
-//            'except'    => ['options'],
-//        ];
+        $behaviors['authenticator'] = [
+            'class'     => HttpBearerAuth::className(),
+            'except'    => ['options'],
+        ];
 
 
         $behaviors[] = [
