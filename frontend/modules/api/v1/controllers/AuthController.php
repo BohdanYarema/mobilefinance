@@ -31,6 +31,7 @@ class AuthController extends Controller
 
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
+            'only'      => ['upload'],
             'except'    => ['options'],
         ];
 
