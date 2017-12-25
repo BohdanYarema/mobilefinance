@@ -19,7 +19,7 @@ class UploadController
     protected function verbs()
     {
         return [
-            'index'     => ['POST', 'HEAD', 'OPTIONS'],
+            'upload'     => ['POST', 'HEAD', 'OPTIONS'],
         ];
     }
 
