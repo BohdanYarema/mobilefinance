@@ -17,25 +17,24 @@ class UploadAction extends Action
      */
     public function run()
     {
-        var_dump(json_encode($_FILES));
-//        $uploads = UploadedFile::getInstanceByName("upfile");
-//        if ($uploads == null){
-//            throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
-//        } else {
+        $uploads = UploadedFile::getInstanceByName("ionicfile");
+        if ($uploads == null){
+            throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
+        } else {
+            $id = 1;
+            $ext = $uploads->getExtension();
+            $name = $id."_".time()."_user_logo_".$ext;
+            $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
 
-//            $ext = $uploads->getExtension();
-//            $name = Yii::$app->user->id."_".time()."_user_logo_".$ext;
-//            $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
-//
-//            $model  = UserProfile::find()->where(['user_id' => 1])->one();
-//            $model->avatar_base_url = Yii::getAlias('@storageUrl').'/source';
-//            $model->avatar_path     = '1/'.$name;
-//            $model->save();
-//
-//            echo $model->getAvatar();
-//
-//            $response = Yii::$app->getResponse();
-//            $response->setStatusCode(200);
-//        }
+            $model  = UserProfile::find()->where(['user_id' => $id])->one();
+            $model->avatar_base_url = Yii::getAlias('@storageUrl').'/source';
+            $model->avatar_path     = '1/'.$name;
+            $model->save();
+
+            echo $model->getAvatar();
+
+            $response = Yii::$app->getResponse();
+            $response->setStatusCode(200);
+        }
     }
 }
