@@ -8,8 +8,13 @@
 
 namespace frontend\modules\api\v1\controllers;
 
+use Yii;
+use yii\filters\AccessControl;
+use yii\filters\Cors;
+use yii\rest\ActiveController;
 
-class UploadController
+
+class UploadController extends ActiveController
 {
     public $modelClass = 'frontend\modules\api\v1\models\Category';
 
