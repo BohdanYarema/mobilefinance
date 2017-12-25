@@ -31,10 +31,12 @@ class UploadAction extends Action
             $model->avatar_path     = '1/'.$name;
             $model->save();
 
-            return Yii::createObject([
-                'avatar_base_url'   => $model->avatar_base_url,
-                'avatar_path'       => $model->avatar_path,
-            ]);
+            return [
+                'image'   => $model->avatar_base_url.'/'.$model->avatar_path,
+                'code'    => 1,
+                "status"  => 200,
+                "message" => "Upload successful.",
+            ];
         }
     }
 }
