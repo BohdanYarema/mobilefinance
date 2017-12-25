@@ -18,7 +18,6 @@ class UploadAction extends Action
     public function run()
     {
         $uploads = UploadedFile::getInstanceByName("ionicfile");
-
         if ($uploads == null){
             throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
         } else {
@@ -32,7 +31,9 @@ class UploadAction extends Action
             $model->avatar_path     = '1/'.$name;
             $model->save();
 
-            echo json_encode($model);
+            return Yii::createObject([
+                'model' => $model->name,
+            ]);
         }
     }
 }
