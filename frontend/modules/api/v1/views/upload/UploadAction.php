@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\api\v1\views\auth;
+namespace frontend\modules\api\v1\views\upload;
 
 use backend\models\SystemLog;
 use frontend\models\UserProfile;
