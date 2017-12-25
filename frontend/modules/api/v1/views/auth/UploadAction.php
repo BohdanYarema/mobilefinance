@@ -17,11 +17,12 @@ class UploadAction extends Action
      */
     public function run()
     {
-        $uploads = UploadedFile::getInstanceByName("upfile");
-        if ($uploads == null){
-            throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
-        } else {
-            var_dump(json_encode($uploads));
+        var_dump(json_encode($_FILES));
+//        $uploads = UploadedFile::getInstanceByName("upfile");
+//        if ($uploads == null){
+//            throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
+//        } else {
+
 //            $ext = $uploads->getExtension();
 //            $name = Yii::$app->user->id."_".time()."_user_logo_".$ext;
 //            $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
