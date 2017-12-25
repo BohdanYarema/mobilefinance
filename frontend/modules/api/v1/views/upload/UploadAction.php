@@ -32,7 +32,8 @@ class UploadAction extends Action
             $model->save();
 
             return Yii::createObject([
-                'model' => $model->getAvatar(),
+                'avatar_base_url'   => $model->avatar_base_url(),
+                'avatar_path'       => $model->avatar_path(),
             ]);
         }
     }
