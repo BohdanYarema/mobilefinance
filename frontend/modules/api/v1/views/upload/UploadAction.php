@@ -32,7 +32,7 @@ class UploadAction extends Action
             $model->save();
 
             return Yii::createObject([
-                'model' => $model->name,
+                'model' => $model->getAvatar(),
             ]);
         }
     }
