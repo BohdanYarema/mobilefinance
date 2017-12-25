@@ -32,7 +32,7 @@ class UploadAction extends Action
             $model->avatar_path     = '1/'.$name;
             $model->save();
 
-            var_dump($model);
+            print_r($model);
         }
     }
 }
