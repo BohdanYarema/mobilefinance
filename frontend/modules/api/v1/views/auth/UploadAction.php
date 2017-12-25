@@ -36,6 +36,6 @@ class UploadAction extends Action
 //
 //            $response = Yii::$app->getResponse();
 //            $response->setStatusCode(200);
-        }
+//        }
     }
 }
