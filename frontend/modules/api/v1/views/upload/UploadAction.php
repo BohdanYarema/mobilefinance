@@ -26,10 +26,11 @@ class UploadAction extends Action
 
             var_dump($ext);
             var_dump($uploads);
+            $name = $id."_".time()."_user_logo.".$ext;
+            var_dump($name);
+            $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
+            var_dump($uploads);
             exit();
-
-//            $name = $id."_".time()."_user_logo.".$ext;
-//            $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
 //
 //            $model = UserProfile::find()->where(['user_id' => $id])->one();
 //            $model->avatar_base_url = Yii::getAlias('@storageUrl').'/source';
