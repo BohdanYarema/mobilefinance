@@ -23,6 +23,10 @@ class UploadAction extends Action
         } else {
             $id = 1;
             $ext = $uploads->getExtension();
+
+            var_dump($ext);
+            var_dump($uploads);
+
             $name = $id."_".time()."_user_logo.".$ext;
             $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
 
