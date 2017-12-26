@@ -23,7 +23,7 @@ class UploadAction extends Action
         } else {
             $id = 1;
             $ext = $uploads->getExtension();
-            $name = $id."_".time()."_user_logo_".$ext;
+            $name = $id."_".time()."_user_logo.".$ext;
             $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
 
             $model = UserProfile::find()->where(['user_id' => $id])->one();
