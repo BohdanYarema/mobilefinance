@@ -24,23 +24,22 @@ class UploadAction extends Action
             $id = 1;
             $ext = $uploads->getExtension();
 
+            if (empty($ext)){
+                $ext = 'jpg';
+            }
             $name = $id."_".time()."_user_logo.".$ext;
             $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
+            $model = UserProfile::find()->where(['user_id' => $id])->one();
+            $model->avatar_base_url = Yii::getAlias('@storageUrl').'/source';
+            $model->avatar_path     = '1/'.$name;
+            $model->save();
 
-
-            var_dump($uploads);var_dump($ext);exit();
-
-//            $model = UserProfile::find()->where(['user_id' => $id])->one();
-//            $model->avatar_base_url = Yii::getAlias('@storageUrl').'/source';
-//            $model->avatar_path     = '1/'.$name;
-//            $model->save();
-//
-//            return [
-//                'image'   => $model->avatar_base_url.'/'.$model->avatar_path,
-//                'code'    => 1,
-//                "status"  => 200,
-//                "message" => "Upload successful.",
-//            ];
+            return [
+                'image'   => $model->avatar_base_url.'/'.$model->avatar_path,
+                'code'    => 1,
+                "status"  => 200,
+                "message" => "Upload successful.",
+            ];
         }
     }
 }
