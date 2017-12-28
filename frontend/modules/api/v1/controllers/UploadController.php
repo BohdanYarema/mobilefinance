@@ -25,6 +25,7 @@ class UploadController extends ActiveController
     {
         return [
             'upload'     => ['POST', 'HEAD', 'OPTIONS'],
+            'profile'    => ['POST', 'HEAD', 'OPTIONS'],
         ];
     }
 
@@ -36,6 +37,11 @@ class UploadController extends ActiveController
         return [
             'upload' => [
                 'class' => 'frontend\modules\api\v1\views\upload\UploadAction',
+                'checkAccess' => [$this, 'checkAccess'],
+                'modelClass' => $this->modelClass,
+            ],
+            'profile' => [
+                'class' => 'frontend\modules\api\v1\views\upload\ProfileAction',
                 'checkAccess' => [$this, 'checkAccess'],
                 'modelClass' => $this->modelClass,
             ],
