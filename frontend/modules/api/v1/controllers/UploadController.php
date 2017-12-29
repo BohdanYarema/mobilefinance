@@ -10,6 +10,7 @@ namespace frontend\modules\api\v1\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\auth\HttpBearerAuth;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
@@ -24,9 +25,29 @@ class UploadController extends ActiveController
     protected function verbs()
     {
         return [
-            'upload'     => ['POST', 'HEAD'],
-            'profile'    => ['POST', 'HEAD'],
+            'upload'     => ['POST', 'HEAD', 'OPTIONS'],
+            'profile'    => ['POST', 'HEAD', 'OPTIONS'],
         ];
+    }
+
+    public function behaviors()
+    {
+        $behaviors['authenticator'] = [
+            'class'     => HttpBearerAuth::className(),
+            'only'      => ['profile'],
+            'except'    => ['options'],
+        ];
+
+
+        $behaviors[] = [
+            'class' => \yii\filters\ContentNegotiator::className(),
+            'only' => ['profile'],
+            'formats' => [
+                'application/json' => \yii\web\Response::FORMAT_JSON,
+            ],
+        ];
+
+        return $behaviors;
     }
 
     /**
