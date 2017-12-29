@@ -3,6 +3,7 @@
 namespace frontend\modules\api\v1\views\upload;
 
 use backend\models\SystemLog;
+use common\models\User;
 use frontend\models\UserProfile;
 use Yii;
 use yii\rest\Action;
@@ -21,26 +22,29 @@ class UploadAction extends Action
         if ($uploads == null){
             throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
         } else {
-            $id = 1;
-            $ext = $uploads->getExtension();
+            $user = User::findByUsername($_POST['username']);
+            if ($user !== null){
 
-            if (empty($ext)){
-                $ext = 'jpg';
+                $ext = $uploads->getExtension();
+
+                if (empty($ext)){
+                    $ext = 'jpg';
+                }
+                $name = $user->id."_".time()."_user_logo.".$ext;
+                $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
+
+                $model = UserProfile::find()->where(['user_id' => $user->id])->one();
+                $model->avatar_base_url = Yii::getAlias('@storageUrl').'/source';
+                $model->avatar_path     = '1/'.$name;
+                $model->save();
+
+                return [
+                    'image'   => $model->avatar_base_url.'/'.$model->avatar_path,
+                    'code'    => 1,
+                    "status"  => 200,
+                    "message" => "Upload successful.",
+                ];
             }
-            $name = $id."_".time()."_user_logo.".$ext;
-            $uploads->saveAs(Yii::getAlias('@storage/web/source/1/').$name);
-            $model = UserProfile::find()->where(['user_id' => $id])->one();
-            $model->avatar_base_url = Yii::getAlias('@storageUrl').'/source';
-            $model->avatar_path     = '1/'.$name;
-            $model->save();
-
-            return [
-                'image'   => $model->avatar_base_url.'/'.$model->avatar_path,
-                'code'    => 1,
-                "status"  => 200,
-                "message" => "Upload successful.",
-                "post"    => $_POST,
-            ];
         }
     }
 }
