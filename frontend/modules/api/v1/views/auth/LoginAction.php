@@ -5,7 +5,7 @@ namespace frontend\modules\api\v1\views\auth;
 use frontend\modules\user\models\LoginForm;
 use Yii;
 use yii\rest\Action;
-use yii\web\HttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
 class LoginAction extends Action
@@ -37,7 +37,7 @@ class LoginAction extends Action
                     'created_at'    => Yii::$app->user->identity->created_at,
                 ]);
             } else {
-                throw new HttpException(401 ,'Username of password are invalid', 401);
+              Yii::$app->response->statusCode = 401;
             }
         }
     }

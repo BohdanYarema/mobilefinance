@@ -38,7 +38,7 @@ class SignupAction extends Action
                     'created_at'    => Yii::$app->user->identity->created_at,
                 ]);
             } else {
-                return json_encode($model->getErrors());
+                Yii::$app->response->statusCode = 401;
             }
         }
     }
