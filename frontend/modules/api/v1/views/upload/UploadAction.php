@@ -39,6 +39,7 @@ class UploadAction extends Action
                 'code'    => 1,
                 "status"  => 200,
                 "message" => "Upload successful.",
+                "post"    => $_POST,
             ];
         }
     }
