@@ -24,8 +24,8 @@ class UploadController extends ActiveController
     protected function verbs()
     {
         return [
-            'upload'     => ['POST', 'HEAD', 'OPTIONS'],
-            'profile'    => ['POST', 'HEAD', 'OPTIONS'],
+            'upload'     => ['POST', 'HEAD'],
+            'profile'    => ['POST', 'HEAD'],
         ];
     }
 
