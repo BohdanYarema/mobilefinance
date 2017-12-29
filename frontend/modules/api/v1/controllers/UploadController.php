@@ -32,8 +32,8 @@ class UploadController extends ActiveController
     {
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
-            'only'      => ['upload', 'profile'],
-            'except'    => ['options'],
+            'only'      => ['profile'],
+            'except'    => ['upload', 'options'],
         ];
 
 
