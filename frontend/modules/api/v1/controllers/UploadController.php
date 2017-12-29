@@ -1,23 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bohdan
- * Date: 25.12.2017
- * Time: 13:53
- */
-
 namespace frontend\modules\api\v1\controllers;
 
+use frontend\modules\api\v1\components\CorsCustom;
 use Yii;
 use yii\filters\AccessControl;
-use yii\filters\auth\HttpBearerAuth;
+use frontend\modules\api\v1\filters\HttpBearerAuth;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
+use yii\web\Response;
 
+/**
+ * Accounting controller
+ */
 
 class UploadController extends ActiveController
 {
-    public $modelClass = 'frontend\modules\api\v1\models\Category';
+    public $modelClass = 'frontend\modules\api\v1\models\Profile';
 
     /**
      * @inheritdoc
@@ -25,8 +23,8 @@ class UploadController extends ActiveController
     protected function verbs()
     {
         return [
-            'upload'     => ['POST', 'HEAD', 'OPTIONS'],
-            'profile'    => ['POST', 'HEAD', 'OPTIONS'],
+            'upload'        => ['POST', 'HEAD', 'OPTIONS'],
+            'profile'       => ['POST', 'HEAD', 'OPTIONS']
         ];
     }
 
@@ -34,14 +32,14 @@ class UploadController extends ActiveController
     {
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
-            'only'      => ['profile'],
+            'only'      => ['upload', 'profile'],
             'except'    => ['options'],
         ];
 
 
         $behaviors[] = [
             'class' => \yii\filters\ContentNegotiator::className(),
-            'only' => ['profile'],
+            'only' => ['upload', 'profile'],
             'formats' => [
                 'application/json' => \yii\web\Response::FORMAT_JSON,
             ],
@@ -58,13 +56,13 @@ class UploadController extends ActiveController
         return [
             'upload' => [
                 'class' => 'frontend\modules\api\v1\views\upload\UploadAction',
-                'checkAccess' => [$this, 'checkAccess'],
                 'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
             ],
             'profile' => [
                 'class' => 'frontend\modules\api\v1\views\upload\ProfileAction',
-                'checkAccess' => [$this, 'checkAccess'],
                 'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
             ],
             'options' => [
                 'class' => 'yii\rest\OptionsAction',
