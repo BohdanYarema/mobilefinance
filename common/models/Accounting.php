@@ -20,7 +20,10 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $updated_at
  * @property integer $category_id
  * @property integer $user_id
+ * @property integer $gps_id
+ * @property integer $gps_status
  * @property string $name
+ * @property string $gps_title
  *
  * @property TagToAccounting[] $tagToAccountings
  */
@@ -55,8 +58,8 @@ class Accounting extends \yii\db\ActiveRecord
         return [
             [['category_id'], 'required'],
             [['price', 'gps_x', 'gps_y'], 'number'],
-            [['status', 'created_at', 'updated_at', 'category_id', 'user_id'], 'integer'],
-            [['name'], 'string', 'max' => 1024],
+            [['status', 'created_at', 'updated_at', 'category_id', 'user_id', 'gps_id', 'gps_status'], 'integer'],
+            [['name', 'gps_title'], 'string', 'max' => 1024],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['dates'], 'default', 'value' => function () {
                 return date(DATE_ISO8601);
@@ -64,6 +67,7 @@ class Accounting extends \yii\db\ActiveRecord
             [['dates'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
         ];
     }
+
 
     /**
      * @inheritdoc
@@ -73,8 +77,11 @@ class Accounting extends \yii\db\ActiveRecord
         return [
             'id'            => 'ID',
             'price'         => 'Price',
+            'gps_id'        => 'GPS Id',
+            'gps_title'     => 'GPS Title',
             'gps_x'         => 'GPS Coords x',
             'gps_y'         => 'GPS Coords y',
+            'gps_status'    => 'GPS Status',
             'dates'         => 'Dates',
             'status'        => 'Status',
             'name'          => 'Name',
@@ -107,5 +114,22 @@ class Accounting extends \yii\db\ActiveRecord
     public static function find()
     {
         return new AccountingQuery(get_called_class());
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+
+            if ($this->gps_status == 0 && $this->gps_id > 0){
+                $data = GpsData::findOne($this->gps_id);
+
+                $this->gps_x        = $data->gps_x;
+                $this->gps_y        = $data->gps_y;
+                $this->gps_title    = $data->name;
+            }
+
+            return true;
+        }
+        return false;
     }
 }

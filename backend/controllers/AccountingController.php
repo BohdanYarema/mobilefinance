@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Category;
+use common\models\GpsData;
 use common\models\User;
 use Yii;
 use common\models\Accounting;
@@ -53,6 +54,7 @@ class AccountingController extends Controller
         $model      = new Accounting();
         $categories = Category::find()->all();
         $users      = User::find()->all();
+        $gps_list   = GpsData::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
@@ -64,7 +66,8 @@ class AccountingController extends Controller
             return $this->render('create', [
                 'model'         => $model,
                 'categories'    => $categories,
-                'users'         => $users
+                'users'         => $users,
+                'gps_list'      => $gps_list
             ]);
         }
     }
@@ -80,6 +83,7 @@ class AccountingController extends Controller
         $model      = $this->findModel($id);
         $categories = Category::find()->all();
         $users      = User::find()->all();
+        $gps_list   = GpsData::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
@@ -91,7 +95,8 @@ class AccountingController extends Controller
             return $this->render('update', [
                 'model'         => $model,
                 'categories'    => $categories,
-                'users'         => $users
+                'users'         => $users,
+                'gps_list'      => $gps_list
             ]);
         }
     }

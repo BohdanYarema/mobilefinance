@@ -8,6 +8,12 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $categories common\models\Category[] */
 /* @var $users common\models\User[] */
+/* @var $gps_list \common\models\GpsData[] */
+
+if ($model->isNewRecord){
+    $model->gps_status = 0;
+}
+
 ?>
 
 <div class="accounting-form">
@@ -32,9 +38,22 @@ use yii\bootstrap\ActiveForm;
         'username'
     )) ?>
 
+    <?=$form->field($model, 'gps_status')->radioList([
+        0 => 'List',
+        1 => 'Fields'
+    ])->label('What you want to use?');?>
+
+    <?php echo $form->field($model, 'gps_id')->dropDownList(\yii\helpers\ArrayHelper::map(
+        $gps_list,
+        'id',
+        'name'
+    )) ?>
+
     <?php echo $form->field($model, 'gps_x')->textInput() ?>
 
     <?php echo $form->field($model, 'gps_y')->textInput() ?>
+
+    <?php echo $form->field($model, 'gps_title')->textInput() ?>
 
     <?php echo $form->field($model, 'dates')->widget(
         \trntv\yii\datetime\DateTimeWidget::className(),
