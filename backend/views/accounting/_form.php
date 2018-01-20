@@ -62,6 +62,13 @@ if ($model->isNewRecord){
         ]
     ) ?>
 
+    <?php
+        echo $form->field($model, 'type')->dropDownList([
+            '1' => 'Наличные',
+            '2' => 'Карточка',
+        ]);
+    ?>
+
     <?php echo $form->field($model, 'status')->checkbox() ?>
 
     <div class="form-group">

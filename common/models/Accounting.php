@@ -23,6 +23,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $gps_id
  * @property integer $gps_status
  * @property string $name
+ * @property integer $type
  * @property string $gps_title
  *
  * @property TagToAccounting[] $tagToAccountings
