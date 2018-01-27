@@ -61,6 +61,7 @@ class LastAction extends Action
             $response[$model->dates][] = [
                 'id'            => $model->id,
                 'category_id'   => $model->category_id,
+                'thumbnail'     => $model->thumbnail,
                 'price'         => $model->price,
                 'dates'         => $model->dates,
                 'name'          => $model->name,
