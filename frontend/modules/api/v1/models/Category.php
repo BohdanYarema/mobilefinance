@@ -14,6 +14,9 @@ class Category extends \common\models\Category
         return [
             'id',
             'name',
+            'count' => function(){
+                return $this->getCount();
+            },
             'thumbnail' => function(){
                 return $this->getThumbnail();
             },
