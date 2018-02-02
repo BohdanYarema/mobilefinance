@@ -33,6 +33,7 @@ class Category extends \yii\db\ActiveRecord
      */
     public $thumbnail;
 
+
     /**
      * @inheritdoc
      */
@@ -95,6 +96,14 @@ class Category extends \yii\db\ActiveRecord
     public function getAccountings()
     {
         return $this->hasMany(Accounting::className(), ['category_id' => 'id'])->andWhere(['user_id' => Yii::$app->user->id]);
+    }
+
+    /**
+     * @return integer
+     */
+    public function getCount()
+    {
+        return $this->hasMany(Accounting::className(), ['category_id' => 'id'])->andWhere(['user_id' => Yii::$app->user->id])->count();
     }
 
     /**

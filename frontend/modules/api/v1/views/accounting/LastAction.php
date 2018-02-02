@@ -11,7 +11,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\rest\Action;
 
-class ListAction extends Action
+class LastAction extends Action
 {
     public $prepareDataProvider;
 
@@ -20,13 +20,13 @@ class ListAction extends Action
      * @return array
      * @var $id integer
      */
-    public function run($id)
+    public function run()
     {
         if ($this->checkAccess) {
             call_user_func($this->checkAccess, $this->id);
         }
 
-        echo json_encode($this->prepareDataProvider($id));
+        echo json_encode($this->prepareDataProvider());
     }
 
     /**
@@ -34,7 +34,7 @@ class ListAction extends Action
      * @return array
      * @var $id integer
      */
-    protected function prepareDataProvider($id)
+    protected function prepareDataProvider()
     {
         $response = [];
 
@@ -48,8 +48,8 @@ class ListAction extends Action
         $dataProvider = Yii::createObject([
             'class' => ActiveDataProvider::className(),
             'query' => $modelClass::find()
-                ->where(['category_id' => $id])
-                //->andWhere(['user_id' => Yii::$app->user->id])
+                ->andWhere(['user_id' => Yii::$app->user->id])
+                ->limit(5)
                 ->orderBy(['dates' => SORT_DESC]),
             'pagination' => false,
         ]);
@@ -61,13 +61,13 @@ class ListAction extends Action
             $response[$model->dates][] = [
                 'id'            => $model->id,
                 'category_id'   => $model->category_id,
+                'thumbnail'     => $model->thumbnail,
                 'price'         => $model->price,
                 'dates'         => $model->dates,
                 'name'          => $model->name,
                 'gps_x'         => $model->gps_x,
                 'gps_y'         => $model->gps_y,
                 'tags'          => $model->tags,
-                'thumbnail'     => $model->thumbnail,
             ];
         endforeach;
 

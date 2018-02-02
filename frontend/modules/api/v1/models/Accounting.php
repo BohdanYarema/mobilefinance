@@ -23,7 +23,15 @@ class Accounting extends \common\models\Accounting
             'tags' => function(){
                 return $this->getTags();
             },
+            'thumbnail' => function(){
+                return $this->getThumbnail();
+            },
         ];
+    }
+
+    public function getThumbnail()
+    {
+        return $this->category->thumbnail_base_url."/".$this->category->thumbnail_path;
     }
 
     public function getTags()
