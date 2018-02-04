@@ -38,7 +38,7 @@ class StatisticController extends ActiveController
             ],
         ];
 
-        return [];
+        return $behaviors;
     }
 
     /**
