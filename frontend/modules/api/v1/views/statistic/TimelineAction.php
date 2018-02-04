@@ -19,13 +19,13 @@ class TimelineAction extends Action
      * @return array
      * @var $id integer
      */
-    public function run($month)
+    public function run($month, $year)
     {
         if ($this->checkAccess) {
             call_user_func($this->checkAccess, $this->id);
         }
 
-        echo json_encode($this->prepareDataProvider($month));
+        echo json_encode($this->prepareDataProvider($month, $year));
     }
 
     /**
@@ -33,12 +33,12 @@ class TimelineAction extends Action
      * @return array
      * @var $id integer
      */
-    protected function prepareDataProvider($month)
+    protected function prepareDataProvider($month, $year)
     {
         $model = Accounting::find()->all();
         $result = [];
         foreach ($model as $item) {
-            if (date('n',$item->dates) == $month){
+            if (date('n',$item->dates) == $month && date('Y',$item->dates) == $year){
                 $result[] = $item;
             }
         }
