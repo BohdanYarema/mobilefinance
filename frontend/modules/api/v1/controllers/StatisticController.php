@@ -26,19 +26,19 @@ class StatisticController extends ActiveController
     {
         $behaviors['authenticator'] = [
             'class'     => HttpBearerAuth::className(),
-            'only'      => ['index'],
+            'only'      => ['index', 'timeline'],
             'except'    => ['options'],
         ];
 
         $behaviors[] = [
             'class' => \yii\filters\ContentNegotiator::className(),
-            'only' => ['index'],
+            'only' => ['index', 'timeline'],
             'formats' => [
                 'application/json' => \yii\web\Response::FORMAT_JSON,
             ],
         ];
 
-        return $behaviors;
+        return [];
     }
 
     /**
@@ -49,6 +49,11 @@ class StatisticController extends ActiveController
         return [
             'index' => [
                 'class' => 'frontend\modules\api\v1\views\statistic\IndexAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'timeline' => [
+                'class' => 'frontend\modules\api\v1\views\statistic\TimelineAction',
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
             ],
