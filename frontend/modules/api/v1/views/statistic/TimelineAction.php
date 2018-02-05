@@ -58,8 +58,8 @@ class TimelineAction extends Action
                         $responses[] = $response;
                     }
 
-                    $result[date('l, F d', $item->dates)] = [
-                        'dates' => $item->dates,
+                    $result[$item->dates] = [
+                        'dates' => date('l, F d', $item->dates),
                         'data'  => $responses
                     ];
                 }
