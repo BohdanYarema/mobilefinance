@@ -45,6 +45,7 @@ class TimelineAction extends Action
             if (date('n',$item->dates) == $month && date('Y',$item->dates) == $year){
                 $data = Accounting::find()
                     ->where(['dates' => $item])
+                    ->asArray()
                     ->all();
                 if (!empty($data)){
                     $result[$item->dates] = $data;
