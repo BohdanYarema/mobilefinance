@@ -65,6 +65,6 @@ class TimelineAction extends Action
                 }
             }
         }
-        return $result;
+        return json_encode($result);
     }
 }
