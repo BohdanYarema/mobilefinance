@@ -22,24 +22,24 @@ class StatisticController extends ActiveController
         ];
     }
 
-    public function behaviors()
-    {
-        $behaviors['authenticator'] = [
-            'class'     => HttpBearerAuth::className(),
-            'only'      => ['index', 'timeline'],
-            'except'    => ['options'],
-        ];
-
-        $behaviors[] = [
-            'class' => \yii\filters\ContentNegotiator::className(),
-            'only' => ['index', 'timeline'],
-            'formats' => [
-                'application/json' => \yii\web\Response::FORMAT_JSON,
-            ],
-        ];
-
-        return $behaviors;
-    }
+//    public function behaviors()
+//    {
+//        $behaviors['authenticator'] = [
+//            'class'     => HttpBearerAuth::className(),
+//            'only'      => ['index', 'timeline'],
+//            'except'    => ['options'],
+//        ];
+//
+//        $behaviors[] = [
+//            'class' => \yii\filters\ContentNegotiator::className(),
+//            'only' => ['index', 'timeline'],
+//            'formats' => [
+//                'application/json' => \yii\web\Response::FORMAT_JSON,
+//            ],
+//        ];
+//
+//        return $behaviors;
+//    }
 
     /**
      * @inheritdoc

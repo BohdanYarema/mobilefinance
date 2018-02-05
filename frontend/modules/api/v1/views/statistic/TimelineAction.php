@@ -35,13 +35,23 @@ class TimelineAction extends Action
      */
     protected function prepareDataProvider($month, $year)
     {
-        $model = Accounting::find()->all();
+        $model = Accounting::find()
+            ->select(['dates'])
+            ->groupBy(['dates'])
+            ->all();
+
         $result = [];
         foreach ($model as $item) {
             if (date('n',$item->dates) == $month && date('Y',$item->dates) == $year){
-                $result[] = $item;
+                $data = Accounting::find()
+                    ->where(['dates' => $item])
+                    ->all();
+                if (!empty($data)){
+                    $result[$item->dates] = $data;
+                }
             }
         }
+
         return $result;
     }
 }
