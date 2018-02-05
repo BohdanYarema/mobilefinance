@@ -40,15 +40,22 @@ class TimelineAction extends Action
             ->groupBy(['dates'])
             ->all();
 
-        $result = [];
+        $result     = [];
+        $response   = [];
         foreach ($model as $item) {
             if (date('n',$item->dates) == $month && date('Y',$item->dates) == $year){
                 $data = Accounting::find()
                     ->where(['dates' => $item])
-                    ->asArray()
                     ->all();
                 if (!empty($data)){
-                    $result[$item->dates] = $data;
+                    foreach ($data as $item){
+                        $response['color']  = $item->category->color;
+                        $response['id']     = $item->id;
+                        $response['name']   = $item->name;
+                        $response['dates']  = $item->dates;
+                        $response['avatar'] = $item->category->thumbnail_base_url."/".$item->category->thumbnail_path;;
+                    }
+                    $result[$item->dates] = $response;
                 }
             }
         }
