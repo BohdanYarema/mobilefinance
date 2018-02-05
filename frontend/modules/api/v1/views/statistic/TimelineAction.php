@@ -58,13 +58,13 @@ class TimelineAction extends Action
                         $responses[] = $response;
                     }
 
-                    $result[$item->dates] = [
+                    $result[$item->dates] = json_encode([
                         'dates' => $item->dates,
                         'data'  => $responses
-                    ];
+                    ]);
                 }
             }
         }
-        return json_encode($result);
+        return $result;
     }
 }
