@@ -49,11 +49,11 @@ class TimelineAction extends Action
                     ->all();
                 if (!empty($data)){
                     foreach ($data as $item){
-                        $response['color']  = $item->category->color;
-                        $response['id']     = $item->id;
-                        $response['name']   = $item->name;
-                        $response['dates']  = $item->dates;
-                        $response['avatar'] = $item->category->thumbnail_base_url."/".$item->category->thumbnail_path;;
+                        $response[]['color']  = $item->category->color;
+                        $response[]['id']     = $item->id;
+                        $response[]['name']   = $item->name;
+                        $response[]['dates']  = $item->dates;
+                        $response[]['avatar'] = $item->category->thumbnail_base_url."/".$item->category->thumbnail_path;;
                     }
                     $result[$item->dates] = $response;
                 }
