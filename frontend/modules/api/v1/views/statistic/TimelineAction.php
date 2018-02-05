@@ -52,8 +52,10 @@ class TimelineAction extends Action
                     foreach ($data as $key => $value){
                         $response['color']      = $value->category->color;
                         $response['id']         = $value->id;
+                        $response['price']      = $value->price;
                         $response['name']       = $value->name;
-                        $response['dates']      = date('d-m-Y', $value->dates);
+                        $response['time']       = date('d-m-Y', $value->dates);
+                        $response['dates']      = $value->dates;
                         $response['avatar']     = $value->category->thumbnail_base_url."/".$value->category->thumbnail_path;;
                         $responses[] = $response;
                     }
