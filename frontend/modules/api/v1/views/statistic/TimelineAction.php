@@ -42,20 +42,26 @@ class TimelineAction extends Action
 
         $result     = [];
         $response   = [];
+        $responses  = [];
         foreach ($model as $item) {
             if (date('n',$item->dates) == $month && date('Y',$item->dates) == $year){
                 $data = Accounting::find()
                     ->where(['dates' => $item])
                     ->all();
                 if (!empty($data)){
-                    foreach ($data as $key => $item){
-                        $response['color']      = $item->category->color;
-                        $response['id']         = $item->id;
-                        $response['name']       = $item->name;
-                        $response['dates']      = $item->dates;
-                        $response['avatar']     = $item->category->thumbnail_base_url."/".$item->category->thumbnail_path;;
-                        $result[$item->dates][] = $response;
+                    foreach ($data as $key => $value){
+                        $response['color']      = $value->category->color;
+                        $response['id']         = $value->id;
+                        $response['name']       = $value->name;
+                        $response['dates']      = $value->dates;
+                        $response['avatar']     = $value->category->thumbnail_base_url."/".$value->category->thumbnail_path;;
+                        $responses[] = $response;
                     }
+
+                    $result[$item->dates] = [
+                        'dates' => $item->dates,
+                        'data'  => $responses
+                    ];
                 }
             }
         }
