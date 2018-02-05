@@ -51,7 +51,6 @@ class TimelineAction extends Action
                 }
             }
         }
-
         return $result;
     }
 }
