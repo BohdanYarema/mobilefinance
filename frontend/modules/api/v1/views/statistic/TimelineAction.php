@@ -53,12 +53,12 @@ class TimelineAction extends Action
                         $response['color']      = $value->category->color;
                         $response['id']         = $value->id;
                         $response['name']       = $value->name;
-                        $response['dates']      = $value->dates;
+                        $response['dates']      = date('d-m-Y', $value->dates);
                         $response['avatar']     = $value->category->thumbnail_base_url."/".$value->category->thumbnail_path;;
                         $responses[] = $response;
                     }
 
-                    $result[$item->dates] = [
+                    $result[date('l, F d', $item->dates)] = [
                         'dates' => $item->dates,
                         'data'  => $responses
                     ];
