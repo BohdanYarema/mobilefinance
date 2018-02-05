@@ -42,12 +42,12 @@ class TimelineAction extends Action
 
         $result     = [];
         $response   = [];
-        $responses  = [];
         foreach ($model as $item) {
             if (date('n',$item->dates) == $month && date('Y',$item->dates) == $year){
                 $data = Accounting::find()
                     ->where(['dates' => $item])
                     ->all();
+                $responses  = [];
                 if (!empty($data)){
                     foreach ($data as $key => $value){
                         $response['color']      = $value->category->color;
