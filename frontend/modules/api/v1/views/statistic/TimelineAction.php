@@ -94,30 +94,33 @@ class TimelineAction extends Action
             }
         }
 
-        foreach ($response as $key => $years){
-            foreach ($years as $months => $item) {
-                foreach ($item as $day) {
-                    $date = date('j', $day->dates);
-                    $final[$key][$months][date('l, F j', $day->dates)] = [];
-                    $finder = [];
-                    foreach ($item as $value) {
-                        if ($date == date('j', $value->dates)){
-                            $finder['color']      = $value->category->color;
-                            $finder['id']         = $value->id;
-                            $finder['gps_x']      = $value->gps_x;
-                            $finder['gps_y']      = $value->gps_y;
-                            $finder['price']      = $value->price;
-                            $finder['name']       = $value->name;
-                            $finder['time']       = date('d-m-Y', $value->dates);
-                            $finder['dates']      = $value->dates;
-                            $finder['avatar']     = $value->category->thumbnail_base_url."/".$value->category->thumbnail_path;
-                            $final[$key][$months][date('l, F j', $day->dates)][] = $finder;
+        if (array_key_exists($year, $final) && array_key_exists($month, $final[$year])){
+            foreach ($response as $key => $years){
+                foreach ($years as $months => $item) {
+                    foreach ($item as $day) {
+                        $date = date('j', $day->dates);
+                        $final[$key][$months][date('l, F j', $day->dates)] = [];
+                        $finder = [];
+                        foreach ($item as $value) {
+                            if ($date == date('j', $value->dates)){
+                                $finder['color']      = $value->category->color;
+                                $finder['id']         = $value->id;
+                                $finder['gps_x']      = $value->gps_x;
+                                $finder['gps_y']      = $value->gps_y;
+                                $finder['price']      = $value->price;
+                                $finder['name']       = $value->name;
+                                $finder['time']       = date('d-m-Y', $value->dates);
+                                $finder['dates']      = $value->dates;
+                                $finder['avatar']     = $value->category->thumbnail_base_url."/".$value->category->thumbnail_path;
+                                $final[$key][$months][date('l, F j', $day->dates)][] = $finder;
+                            }
                         }
                     }
                 }
             }
+            return $final[$year][$month];
+        } else {
+            return [];
         }
-
-        return $final[$year][$month];
     }
 }
