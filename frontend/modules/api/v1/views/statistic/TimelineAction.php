@@ -35,7 +35,7 @@ class TimelineAction extends Action
      */
     protected function prepareDataProvider($year, $month)
     {
-        $result = Accounting::find()->all();
+        $result = Accounting::find()->orderBy(['dates' => SORT_DESC])->all();
 
         $data = [];
         $final = [];
