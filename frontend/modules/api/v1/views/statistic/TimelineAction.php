@@ -118,6 +118,11 @@ class TimelineAction extends Action
             }
         }
 
-        return $final[$year][$month];
+        if (array_key_exists($year, $final) && array_key_exists($month, $final[$year])){
+            return $final[$year][$month];
+        } else {
+            return [];
+        }
+
     }
 }
