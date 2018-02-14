@@ -9,6 +9,7 @@ namespace frontend\modules\api\v1\views\statistic;
 
 use frontend\modules\api\v1\models\Accounting;
 use yii\rest\Action;
+use Yii;
 
 class TimelineAction extends Action
 {
@@ -35,7 +36,9 @@ class TimelineAction extends Action
      */
     protected function prepareDataProvider($year, $month)
     {
-        $result = Accounting::find()->orderBy(['dates' => SORT_ASC])->all();
+        $result = Accounting::find()
+            ->where(['user_id' => Yii::$app->user->id])
+            ->orderBy(['dates' => SORT_ASC])->all();
 
         $data = [];
         $final = [];

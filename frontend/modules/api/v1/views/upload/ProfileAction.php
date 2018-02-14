@@ -19,8 +19,8 @@ class ProfileAction extends Action
         if (!Yii::$app->request->post()){
             throw new HttpException('400', 'Test');
         } else {
-            $id = 1;
-            $post = Yii::$app->request->post();
+            $id     = Yii::$app->user->id;
+            $post   = Yii::$app->request->post();
 
             $model = UserProfile::find()->where(['user_id' => $id])->one();
             $model->firstname   = $post['firstname'];
