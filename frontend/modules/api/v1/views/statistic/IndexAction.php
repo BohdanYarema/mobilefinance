@@ -41,13 +41,11 @@ class IndexAction extends Action
         $count = (new \yii\db\Query())
             ->select('category_id, COUNT(id) as count')
             ->from('accounting')
-            ->groupBy('category_id')
             ->all();
 
         $avg = (new \yii\db\Query())
             ->select('category_id, AVG(price) as avg')
             ->from('accounting')
-            ->groupBy('category_id')
             ->all();
 
         $max = (new \yii\db\Query())
@@ -65,7 +63,6 @@ class IndexAction extends Action
         $model = (new \yii\db\Query())
             ->select('category_id, SUM(price) as summary')
             ->from('accounting')
-            ->groupBy('category_id')
             ->all();
 
         return [
