@@ -39,14 +39,14 @@ class IndexAction extends Action
     protected function prepareDataProvider()
     {
         $count = (new \yii\db\Query())
-            ->select('category_id, COUNT(id) as count')
+            ->select('COUNT(id) as count')
             ->from('accounting')
-            ->all();
+            ->one();
 
         $avg = (new \yii\db\Query())
-            ->select('category_id, AVG(price) as avg')
+            ->select('AVG(price) as avg')
             ->from('accounting')
-            ->all();
+            ->one();
 
         $max = (new \yii\db\Query())
             ->select('category_id, MAX(price) as max')
@@ -61,9 +61,9 @@ class IndexAction extends Action
             ->all();
 
         $model = (new \yii\db\Query())
-            ->select('category_id, SUM(price) as summary')
+            ->select('SUM(price) as summary')
             ->from('accounting')
-            ->all();
+            ->one();
 
         return [
             'summary'   => $model,
