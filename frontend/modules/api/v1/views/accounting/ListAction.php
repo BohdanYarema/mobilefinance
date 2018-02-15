@@ -45,16 +45,17 @@ class ListAction extends Action
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $this->modelClass;
 
-        $dataProvider = Yii::createObject([
-            'class' => ActiveDataProvider::className(),
-            'query' => $modelClass::find()
-                ->where(['category_id' => $id])
-                ->andWhere(['user_id' => Yii::$app->user->id])
-                ->orderBy(['dates' => SORT_DESC]),
-            'pagination' => false,
-        ]);
+        $auery = $modelClass::find()
+            ->where(['category_id' => $id])
+            ->andWhere(['user_id' => Yii::$app->user->id])
+            ->orderBy(['dates' => SORT_ASC])->all();
 
-        foreach($dataProvider->getModels() as $model):
+
+        var_dump($auery);
+        exit();
+
+
+        foreach($auery as $model):
             if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
                 $date = Yii::$app->formatter->asDate($model->dates);
             endif;
