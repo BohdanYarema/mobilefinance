@@ -48,7 +48,7 @@ class ListAction extends Action
         $auery = $modelClass::find()
             ->where(['category_id' => $id])
             ->andWhere(['user_id' => Yii::$app->user->id])
-            ->orderBy(['dates' => SORT_DESC])->all();
+            ->orderBy(['dates' => SORT_ASC])->all();
 
         foreach($auery as $model):
             if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
