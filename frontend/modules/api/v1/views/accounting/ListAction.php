@@ -65,7 +65,7 @@ class ListAction extends Action
                 'thumbnail'     => $model->thumbnail,
             ];
         endforeach;
-        krsort($response);
+        ksort($response);
         return $response;
     }
 }
