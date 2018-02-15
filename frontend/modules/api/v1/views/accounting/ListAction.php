@@ -46,7 +46,7 @@ class ListAction extends Action
         $modelClass = $this->modelClass;
 
         $dataProvider = $modelClass::find()
-                ->where(['category_id' => $id, 'user_id' => 1])
+                ->where(['category_id' => $id, 'user_id' => Yii::$app->user->id])
                 ->orderBy(['dates' => SORT_DESC])->all();
 
         foreach($dataProvider as $model):
