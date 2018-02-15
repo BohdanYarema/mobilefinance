@@ -50,7 +50,7 @@ class ListAction extends Action
             'query' => $modelClass::find()
                 ->where(['category_id' => $id])
                 ->andWhere(['user_id' => Yii::$app->user->id])
-                ->orderBy(['dates' => SORT_ASC]),
+                ->orderBy(['dates' => SORT_DESC]),
             'pagination' => false,
         ]);
 
