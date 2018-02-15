@@ -47,7 +47,7 @@ class ListAction extends Action
 
         $dataProvider = $modelClass::find()
                 ->where(['category_id' => $id, 'user_id' => Yii::$app->user->id])
-                ->orderBy(['dates' => SORT_ASC])->all();
+                ->orderBy(['dates' => SORT_DESC])->all();
 
         foreach($dataProvider as $model):
             if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
@@ -65,7 +65,6 @@ class ListAction extends Action
                 'thumbnail'     => $model->thumbnail,
             ];
         endforeach;
-        ksort($response);
         return $response;
     }
 }
