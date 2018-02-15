@@ -47,7 +47,7 @@ class ListAction extends Action
 
         $dataProvider = $modelClass::find()
                 ->where(['category_id' => $id, 'user_id' => Yii::$app->user->id])
-                ->orderBy(['dates' => SORT_DESC])->all();
+                ->orderBy(['dates' => SORT_ASC])->all();
 
         foreach($dataProvider as $model):
             if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
