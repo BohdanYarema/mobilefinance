@@ -40,28 +40,33 @@ class IndexAction extends Action
     {
         $count = (new \yii\db\Query())
             ->select('COUNT(id) as count')
+            ->where(['user_id' => Yii::$app->user->id])
             ->from('accounting')
             ->one();
 
         $avg = (new \yii\db\Query())
             ->select('AVG(price) as avg')
+            ->where(['user_id' => Yii::$app->user->id])
             ->from('accounting')
             ->one();
 
         $max = (new \yii\db\Query())
             ->select('category_id, MAX(price) as max')
+            ->where(['user_id' => Yii::$app->user->id])
             ->from('accounting')
             ->groupBy('category_id')
             ->all();
 
         $min = (new \yii\db\Query())
             ->select('category_id, MIN(price) as min')
+            ->where(['user_id' => Yii::$app->user->id])
             ->from('accounting')
             ->groupBy('category_id')
             ->all();
 
         $model = (new \yii\db\Query())
             ->select('SUM(price) as summary')
+            ->where(['user_id' => Yii::$app->user->id])
             ->from('accounting')
             ->one();
 
