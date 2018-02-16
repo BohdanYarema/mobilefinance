@@ -264,6 +264,9 @@ class User extends ActiveRecord implements IdentityInterface
         $profile->locale = Yii::$app->language;
         $profile->avatar_base_url   = 'http://devservice.pro/img';
         $profile->avatar_path       = '1/icon.png';
+        $profile->firstname         = 'Firstname';
+        $profile->lastname          = 'Lastname';
+        $profile->middlename        = 'Middlename';
         $profile->load($profileData, '');
         $this->link('userProfile', $profile);
         $this->trigger(self::EVENT_AFTER_SIGNUP);
