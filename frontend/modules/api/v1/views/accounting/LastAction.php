@@ -55,10 +55,7 @@ class LastAction extends Action
         ]);
 
         foreach($dataProvider->getModels() as $model):
-            if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
-                $date = Yii::$app->formatter->asDate($model->dates);
-            endif;
-            $response[$model->dates][] = [
+            $response[] = [
                 'id'            => $model->id,
                 'category_id'   => $model->category_id,
                 'thumbnail'     => $model->thumbnail,
