@@ -49,7 +49,7 @@ class LastAction extends Action
             'class' => ActiveDataProvider::className(),
             'query' => $modelClass::find()
                 ->andWhere(['user_id' => Yii::$app->user->id])
-                ->limit(5)
+                ->limit(4)
                 ->orderBy(['dates' => SORT_DESC]),
             'pagination' => false,
         ]);
