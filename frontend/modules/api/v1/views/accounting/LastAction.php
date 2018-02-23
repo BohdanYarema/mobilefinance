@@ -51,6 +51,7 @@ class LastAction extends Action
                 ->andWhere(['user_id' => Yii::$app->user->id])
                 ->limit(4)
                 ->orderBy(['dates' => SORT_DESC]),
+            'pagination' => false,
         ]);
 
         foreach($dataProvider->getModels() as $model):
