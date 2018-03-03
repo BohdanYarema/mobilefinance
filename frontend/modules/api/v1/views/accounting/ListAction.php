@@ -54,7 +54,7 @@ class ListAction extends Action
                 'id'            => $model->id,
                 'category_id'   => $model->category_id,
                 'price'         => $model->price,
-                'dates'         => $model->dates,
+                'dates'         => date('d-m-Y', $model->dates),
                 'name'          => $model->name,
                 'gps_x'         => $model->gps_x,
                 'gps_y'         => $model->gps_y,
