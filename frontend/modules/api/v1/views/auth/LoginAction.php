@@ -42,7 +42,7 @@ class LoginAction extends Action
                     'middlename'    => Yii::$app->user->identity['userProfile']->middlename,
                     'gender'        => Yii::$app->user->identity['userProfile']->gender,
                     'created_at'    => Yii::$app->user->identity->created_at,
-                    'summary'       => $stats->summary,
+                    'summary'       => $stats,
                 ]);
             } else {
               Yii::$app->response->statusCode = 401;
