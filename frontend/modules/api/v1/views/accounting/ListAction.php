@@ -59,6 +59,7 @@ class ListAction extends Action
                 'gps_x'         => $model->gps_x,
                 'gps_y'         => $model->gps_y,
                 'tags'          => $model->tags,
+                'type'          => $model->type,
                 'thumbnail'     => $model->thumbnail,
             ];
         endforeach;

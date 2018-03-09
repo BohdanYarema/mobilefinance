@@ -62,6 +62,7 @@ class LastAction extends Action
                 'price'         => $model->price,
                 'dates'         => date('d-m-Y', $model->dates),
                 'name'          => $model->name,
+                'type'          => $model->type,
                 'gps_x'         => $model->gps_x,
                 'gps_y'         => $model->gps_y,
                 'tags'          => $model->tags,
