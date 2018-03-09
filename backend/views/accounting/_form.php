@@ -64,8 +64,8 @@ if ($model->isNewRecord){
 
     <?php
         echo $form->field($model, 'type')->dropDownList([
-            '1' => 'Наличные',
-            '2' => 'Карточка',
+            '0' => 'Наличные',
+            '1' => 'Карточка',
         ]);
     ?>
 

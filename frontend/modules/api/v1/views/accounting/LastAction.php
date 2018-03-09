@@ -55,7 +55,7 @@ class LastAction extends Action
         ]);
 
         foreach($dataProvider->getModels() as $model):
-            if($model->type === null){
+            if($model->type == 0 || $model->type === null){
                 $type = false;
             } else {
                 $type = true;

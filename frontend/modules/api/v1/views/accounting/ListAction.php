@@ -50,7 +50,7 @@ class ListAction extends Action
                 ->orderBy(['dates' => SORT_DESC])->all();
 
         foreach($dataProvider as $model):
-            if($model->type === null){
+            if($model->type == 0 || $model->type === null){
                 $type = false;
             } else {
                 $type = true;
