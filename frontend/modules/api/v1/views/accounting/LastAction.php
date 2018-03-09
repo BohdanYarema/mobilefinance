@@ -55,6 +55,11 @@ class LastAction extends Action
         ]);
 
         foreach($dataProvider->getModels() as $model):
+            if($model->type === null){
+                $type = false;
+            } else {
+                $type = true;
+            }
             $response[] = [
                 'id'            => $model->id,
                 'category_id'   => $model->category_id,
@@ -62,7 +67,7 @@ class LastAction extends Action
                 'price'         => $model->price,
                 'dates'         => date('d-m-Y', $model->dates),
                 'name'          => $model->name,
-                'type'          => $model->type,
+                'type'          => $type,
                 'gps_x'         => $model->gps_x,
                 'gps_y'         => $model->gps_y,
                 'tags'          => $model->tags,

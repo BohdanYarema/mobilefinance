@@ -50,6 +50,11 @@ class ListAction extends Action
                 ->orderBy(['dates' => SORT_DESC])->all();
 
         foreach($dataProvider as $model):
+            if($model->type === null){
+                $type = false;
+            } else {
+                $type = true;
+            }
             $response[] = [
                 'id'            => $model->id,
                 'category_id'   => $model->category_id,
@@ -59,7 +64,7 @@ class ListAction extends Action
                 'gps_x'         => $model->gps_x,
                 'gps_y'         => $model->gps_y,
                 'tags'          => $model->tags,
-                'type'          => $model->type,
+                'type'          => $type,
                 'thumbnail'     => $model->thumbnail,
             ];
         endforeach;
