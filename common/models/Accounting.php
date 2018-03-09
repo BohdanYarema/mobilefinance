@@ -59,7 +59,7 @@ class Accounting extends \yii\db\ActiveRecord
         return [
             [['category_id'], 'required'],
             [['price', 'gps_x', 'gps_y'], 'number'],
-            [['status', 'created_at', 'updated_at', 'category_id', 'user_id', 'gps_id', 'gps_status'], 'integer'],
+            [['status', 'created_at', 'updated_at', 'category_id', 'user_id', 'gps_id', 'gps_status', 'type'], 'integer'],
             [['name', 'gps_title'], 'string', 'max' => 1024],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['dates'], 'default', 'value' => function () {
@@ -84,6 +84,7 @@ class Accounting extends \yii\db\ActiveRecord
             'gps_y'         => 'GPS Coords y',
             'gps_status'    => 'GPS Status',
             'dates'         => 'Dates',
+            'type'          => 'Type',
             'status'        => 'Status',
             'name'          => 'Name',
             'category_id'   => 'Category',
