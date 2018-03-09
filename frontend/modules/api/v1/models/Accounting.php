@@ -16,6 +16,7 @@ class Accounting extends \common\models\Accounting
             'id',
             'price',
             'name',
+            'dates',
             'gps_x',
             'gps_y',
             'created_at',

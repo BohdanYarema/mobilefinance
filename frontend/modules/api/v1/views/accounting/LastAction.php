@@ -49,21 +49,18 @@ class LastAction extends Action
             'class' => ActiveDataProvider::className(),
             'query' => $modelClass::find()
                 ->andWhere(['user_id' => Yii::$app->user->id])
-                ->limit(5)
+                ->limit(4)
                 ->orderBy(['dates' => SORT_DESC]),
             'pagination' => false,
         ]);
 
         foreach($dataProvider->getModels() as $model):
-            if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
-                $date = Yii::$app->formatter->asDate($model->dates);
-            endif;
-            $response[$model->dates][] = [
+            $response[] = [
                 'id'            => $model->id,
                 'category_id'   => $model->category_id,
                 'thumbnail'     => $model->thumbnail,
                 'price'         => $model->price,
-                'dates'         => $model->dates,
+                'dates'         => date('d-m-Y', $model->dates),
                 'name'          => $model->name,
                 'gps_x'         => $model->gps_x,
                 'gps_y'         => $model->gps_y,

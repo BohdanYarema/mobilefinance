@@ -45,24 +45,16 @@ class ListAction extends Action
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $this->modelClass;
 
-        $dataProvider = Yii::createObject([
-            'class' => ActiveDataProvider::className(),
-            'query' => $modelClass::find()
-                ->where(['category_id' => $id])
-                ->andWhere(['user_id' => Yii::$app->user->id])
-                ->orderBy(['dates' => SORT_DESC]),
-            'pagination' => false,
-        ]);
+        $dataProvider = $modelClass::find()
+                ->where(['category_id' => $id, 'user_id' => Yii::$app->user->id])
+                ->orderBy(['dates' => SORT_DESC])->all();
 
-        foreach($dataProvider->getModels() as $model):
-            if(!isset($date) || $date != Yii::$app->formatter->asDate($model->dates)):
-                $date = Yii::$app->formatter->asDate($model->dates);
-            endif;
-            $response[$model->dates][] = [
+        foreach($dataProvider as $model):
+            $response[] = [
                 'id'            => $model->id,
                 'category_id'   => $model->category_id,
                 'price'         => $model->price,
-                'dates'         => $model->dates,
+                'dates'         => date('d-m-Y', $model->dates),
                 'name'          => $model->name,
                 'gps_x'         => $model->gps_x,
                 'gps_y'         => $model->gps_y,
@@ -70,7 +62,6 @@ class ListAction extends Action
                 'thumbnail'     => $model->thumbnail,
             ];
         endforeach;
-
         return $response;
     }
 }

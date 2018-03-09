@@ -24,6 +24,13 @@ class LoginAction extends Action
             $model->password = $password;
 
             if ($model->validate() && $model->login()){
+
+                $stats = (new \yii\db\Query())
+                    ->select('SUM(price) as summary')
+                    ->where(['user_id' => Yii::$app->user->id])
+                    ->from('accounting')
+                    ->one();
+
                 return json_encode([
                     'id'            => Yii::$app->user->identity->id,
                     'access_token'  => Yii::$app->user->identity->getAuthKey(),
@@ -35,6 +42,7 @@ class LoginAction extends Action
                     'middlename'    => Yii::$app->user->identity['userProfile']->middlename,
                     'gender'        => Yii::$app->user->identity['userProfile']->gender,
                     'created_at'    => Yii::$app->user->identity->created_at,
+                    'summary'       => $stats,
                 ]);
             } else {
               Yii::$app->response->statusCode = 401;
